@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -7,16 +6,67 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 grid gap-y-10 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <Image 
-              src="/logo.png" 
-              alt="Recon Technologies" 
-              width={759}
-              height={281}
-              className="h-9 w-auto" 
-            />
+            {/* American flag icon (replaces logo in footer) */}
+            <div 
+              className="w-8 h-5 flex-shrink-0 overflow-hidden rounded-sm border border-white/20 shadow-sm" 
+              aria-hidden="true"
+            >
+              <svg 
+                viewBox="0 0 190 100" 
+                className="w-full h-full" 
+              >
+                {/* Red field */}
+                <rect width="190" height="100" fill="#B22234" />
+                {/* White stripes */}
+                <rect y="7.69" width="190" height="7.69" fill="#fff" />
+                <rect y="23.08" width="190" height="7.69" fill="#fff" />
+                <rect y="38.46" width="190" height="7.69" fill="#fff" />
+                <rect y="53.85" width="190" height="7.69" fill="#fff" />
+                <rect y="69.23" width="190" height="7.69" fill="#fff" />
+                <rect y="84.62" width="190" height="7.69" fill="#fff" />
+                {/* Blue canton */}
+                <rect width="76" height="53.85" fill="#3C3B6E" />
+                {/* Simplified stars (dots for small size readability) */}
+                <g fill="#fff">
+                  {/* Row 1 */}
+                  <circle cx="8" cy="6" r="2" />
+                  <circle cx="20" cy="6" r="2" />
+                  <circle cx="32" cy="6" r="2" />
+                  <circle cx="44" cy="6" r="2" />
+                  <circle cx="56" cy="6" r="2" />
+                  <circle cx="68" cy="6" r="2" />
+                  {/* Row 2 */}
+                  <circle cx="14" cy="15" r="2" />
+                  <circle cx="26" cy="15" r="2" />
+                  <circle cx="38" cy="15" r="2" />
+                  <circle cx="50" cy="15" r="2" />
+                  <circle cx="62" cy="15" r="2" />
+                  {/* Row 3 */}
+                  <circle cx="8" cy="24" r="2" />
+                  <circle cx="20" cy="24" r="2" />
+                  <circle cx="32" cy="24" r="2" />
+                  <circle cx="44" cy="24" r="2" />
+                  <circle cx="56" cy="24" r="2" />
+                  <circle cx="68" cy="24" r="2" />
+                  {/* Row 4 */}
+                  <circle cx="14" cy="33" r="2" />
+                  <circle cx="26" cy="33" r="2" />
+                  <circle cx="38" cy="33" r="2" />
+                  <circle cx="50" cy="33" r="2" />
+                  <circle cx="62" cy="33" r="2" />
+                  {/* Row 5 */}
+                  <circle cx="8" cy="42" r="2" />
+                  <circle cx="20" cy="42" r="2" />
+                  <circle cx="32" cy="42" r="2" />
+                  <circle cx="44" cy="42" r="2" />
+                  <circle cx="56" cy="42" r="2" />
+                  <circle cx="68" cy="42" r="2" />
+                </g>
+              </svg>
+            </div>
           </div>
-          <p className="text-sm text-slate-400 max-w-[18ch]">
-            On-site sodium hypochlorite generation for dairy farms since 2008.
+          <p className="text-sm text-slate-400 max-w-[22ch]">
+            Proudly engineered and made in the USA
           </p>
         </div>
 
