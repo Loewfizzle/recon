@@ -49,7 +49,8 @@ app/
 - Update contact info (phone, email) in Header, Footer, and CTA sections.
 - Tweak calculator assumptions in `SavingsCalculator.tsx` when real pricing data is available.
 - Logo is at `public/logo.png` (full lockup). If you swap the file, update the `src="/logo.png"` in `app/components/Header.tsx` and `Footer.tsx`.
-- Add a real `og-image.png` in `/public` for social sharing.
+- Favicon is at `app/favicon.ico` (update with branded version if desired).
+- og:image is currently using the logo (see layout.tsx); add a proper 1200x630 `og-image.png` in `/public` for best social sharing.
 
 ## Deployment
 

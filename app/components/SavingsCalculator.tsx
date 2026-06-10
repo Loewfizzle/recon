@@ -1,19 +1,42 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Calculator, TrendingUp, DollarSign } from 'lucide-react';
 
 export default function SavingsCalculator() {
   const [herdSize, setHerdSize] = useState(620);
   const [currentMonthly, setCurrentMonthly] = useState(1850);
+  const [variablePerCow, setVariablePerCow] = useState(0.92);
+  const [serviceFee, setServiceFee] = useState(189);
 
-  // Realistic but simplified model — tuned for impressive yet believable results
-  // Recon cost = low variable per cow (salt, power, filters) + shared service/support fee
+  // Load from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('reconCalculator');
+    if (saved) {
+      try {
+        const { herd, spend, vpc, fee } = JSON.parse(saved);
+        if (herd) setHerdSize(herd);
+        if (spend) setCurrentMonthly(spend);
+        if (vpc) setVariablePerCow(vpc);
+        if (fee) setServiceFee(fee);
+      } catch {}
+    }
+  }, []);
+
+  // Save to localStorage when values change
+  useEffect(() => {
+    localStorage.setItem('reconCalculator', JSON.stringify({
+      herd: herdSize,
+      spend: currentMonthly,
+      vpc: variablePerCow,
+      fee: serviceFee,
+    }));
+  }, [herdSize, currentMonthly, variablePerCow, serviceFee]);
+
+  // Realistic but simplified model — assumptions are now tunable
   const reconMonthly = useMemo(() => {
-    const variablePerCow = 0.92; // ~$0.92/cow/mo all-in for on-site generation
-    const serviceFee = 189;      // monthly support + consumables plan
     return Math.round(herdSize * variablePerCow + serviceFee);
-  }, [herdSize]);
+  }, [herdSize, variablePerCow, serviceFee]);
 
   const monthlySavings = Math.max(0, currentMonthly - reconMonthly);
   const annualSavings = monthlySavings * 12;
@@ -115,8 +138,32 @@ export default function SavingsCalculator() {
             </div>
           </div>
 
-          <div className="text-xs leading-snug text-[#64748b] pt-1">
-            These are estimates based on real-world dairy usage patterns and on-site generation costs (salt, power, filters, and service). Your actual numbers may vary.
+          <div className="pt-4 border-t text-xs">
+            <div className="font-semibold tracking-wide text-[#334155] mb-2">TUNABLE ASSUMPTIONS (adjust for your operation)</div>
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="block text-[#64748b] mb-0.5">Variable $/cow/mo</label>
+                <input
+                  type="number"
+                  step="0.01"
+                  value={variablePerCow}
+                  onChange={(e) => setVariablePerCow(parseFloat(e.target.value) || 0.92)}
+                  className="input-number w-full"
+                />
+              </div>
+              <div>
+                <label className="block text-[#64748b] mb-0.5">Monthly service fee</label>
+                <input
+                  type="number"
+                  value={serviceFee}
+                  onChange={(e) => setServiceFee(parseInt(e.target.value) || 189)}
+                  className="input-number w-full"
+                />
+              </div>
+            </div>
+            <div className="mt-2 text-[#64748b] leading-snug">
+              These are estimates based on real-world dairy usage patterns and on-site generation costs. Your actual numbers may vary.
+            </div>
           </div>
         </div>
 
@@ -156,6 +203,26 @@ export default function SavingsCalculator() {
             Get a Personalized Quote
           </a>
           <p className="text-center text-[12px] text-[#64748b]">No obligation. We’ll run the exact numbers for your parlor.</p>
+
+          {/* Share / Email results */}
+          <div className="pt-3 border-t flex gap-2">
+            <button
+              onClick={() => {
+                const text = `Recon Savings Estimate\nHerd: ${herdSize} cows\nCurrent: ${formatCurrency(currentMonthly)}/mo\nRecon est: ${formatCurrency(reconMonthly)}/mo\nMonthly savings: ${formatCurrency(monthlySavings)} (${percentSavings}%)\nAnnual savings: ${formatCurrency(annualSavings)}\nRecommended: ${recommended} Cell`;
+                navigator.clipboard?.writeText(text);
+                alert('Results copied to clipboard!');
+              }}
+              className="btn-secondary text-sm flex-1 justify-center"
+            >
+              Copy results
+            </button>
+            <a
+              href={`mailto:?subject=Recon%20Savings%20Estimate&body=${encodeURIComponent(`Herd: ${herdSize} cows\nCurrent monthly cost: ${formatCurrency(currentMonthly)}\nEstimated Recon cost: ${formatCurrency(reconMonthly)}\nMonthly savings: ${formatCurrency(monthlySavings)} (${percentSavings}%)\nAnnual savings: ${formatCurrency(annualSavings)}\nRecommended machine: ${recommended} Cell\n\n(Estimates only — contact Recon for exact quote.)`)}`}
+              className="btn-secondary text-sm flex-1 justify-center"
+            >
+              Email results
+            </a>
+          </div>
         </div>
       </div>
     </div>

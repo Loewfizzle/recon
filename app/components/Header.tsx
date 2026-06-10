@@ -41,7 +41,7 @@ export default function Header() {
             alt="Recon Technologies" 
             width={759}
             height={281}
-            className="h-12 w-auto" 
+            className="h-10 w-auto md:h-12" 
             priority
           />
         </a>

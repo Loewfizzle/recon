@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Recon Technologies | On-Farm Sodium Hypochlorite for Dairy",
     description: "On-site ECA generation for fresh, low-cost teat dip. Single & Dual Cell machines. Calculate your savings today.",
-    images: [{ url: "/og-image.png" }], // placeholder; replace with real when available
+    images: [{ url: "/logo.png" }], // TODO: replace with proper 1200x630 og-image.png in /public
   },
 };
 

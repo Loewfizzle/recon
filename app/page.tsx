@@ -11,7 +11,7 @@ import { Check, X, ArrowRight, Users, Clock, Shield, DollarSign, Leaf, Zap } fro
 const singleCellDetails = (
   <div className="space-y-5">
     <div>
-      <div className="uppercase tracking-[1px] text-xs font-semibold text-[#0f766e]">C100 / SINGLE CELL</div>
+      <div className="uppercase tracking-[1px] text-xs font-semibold text-[var(--color-accent)]">C100 / SINGLE CELL</div>
       <div className="text-2xl font-semibold tracking-tight mt-1">Reliable capacity for most dairies</div>
     </div>
 
@@ -46,7 +46,7 @@ const singleCellDetails = (
 const dualCellDetails = (
   <div className="space-y-5">
     <div>
-      <div className="uppercase tracking-[1px] text-xs font-semibold text-[#0f766e]">C200 / DUAL CELL</div>
+      <div className="uppercase tracking-[1px] text-xs font-semibold text-[var(--color-accent)]">C200 / DUAL CELL</div>
       <div className="text-2xl font-semibold tracking-tight mt-1">Maximum output for larger herds &amp; full-parlor use</div>
     </div>
 
@@ -91,7 +91,7 @@ export default function ReconLanding() {
       {/* HERO */}
       <section className="pt-10 pb-16 sm:pt-14 sm:pb-20 border-b bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#14532d]/10 px-4 py-1 text-sm font-medium text-[#14532d] mb-5">
+          <div className="inline-flex items-center gap-2 rounded-full bg-[var(--color-primary)]/10 px-4 py-1 text-sm font-medium text-[var(--color-primary)] mb-5">
             <Leaf className="w-4 h-4" /> On-site generation since 2008
           </div>
 
@@ -150,7 +150,7 @@ export default function ReconLanding() {
               <h3 className="text-2xl font-semibold tracking-tight mt-2">Single Cell Machine</h3>
               <div className="mt-5 space-y-3 text-[15px]">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-4xl font-semibold tabular-nums text-[#14532d]">103</span>
+                  <span className="text-4xl font-semibold tabular-nums text-[var(--color-primary)]">103</span>
                   <span className="text-[#475569]">hours to fill a 275-gallon tote</span>
                 </div>
                 <div className="text-[#475569]">Best for mid-size herds or farms primarily focused on pre-dip.</div>
@@ -168,7 +168,7 @@ export default function ReconLanding() {
             </div>
 
             {/* Dual Cell Card */}
-            <div className="card p-6 sm:p-7 flex flex-col ring-1 ring-[#14532d]/10">
+            <div className="card p-6 sm:p-7 flex flex-col ring-1 ring-[var(--color-primary)]/10">
               <div className="flex items-center gap-2">
                 <div className="uppercase text-xs tracking-[1px] font-semibold text-[#0f766e]">DUAL CELL • C200</div>
                 <div className="text-[10px] px-2 py-px rounded bg-[#14532d] text-white font-medium">FASTER</div>
@@ -176,7 +176,7 @@ export default function ReconLanding() {
               <h3 className="text-2xl font-semibold tracking-tight mt-2">Dual Cell Machine</h3>
               <div className="mt-5 space-y-3 text-[15px]">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-4xl font-semibold tabular-nums text-[#14532d]">53</span>
+                  <span className="text-4xl font-semibold tabular-nums text-[var(--color-primary)]">53</span>
                   <span className="text-[#475569]">hours to fill a 275-gallon tote</span>
                 </div>
                 <div className="text-[#475569]">Nearly twice the speed. Ideal for larger herds and full-parlor chemical programs (pre-dip + wash + hutches).</div>
@@ -266,7 +266,7 @@ export default function ReconLanding() {
             { icon: Users, title: "Built by dairy people", desc: "We’ve been serving producers since 2008. We understand parlor workflows, mastitis prevention, and the real economics of your operation." },
           ].map((benefit, i) => (
             <div key={i} className="card p-6">
-              <div className="w-10 h-10 rounded-2xl bg-[#14532d]/10 text-[#14532d] flex items-center justify-center mb-4">
+              <div className="w-10 h-10 rounded-2xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center mb-4">
                 <benefit.icon className="w-5 h-5" />
               </div>
               <div className="font-semibold text-lg tracking-tight mb-2">{benefit.title}</div>
@@ -311,7 +311,30 @@ export default function ReconLanding() {
           <h2 className="text-3xl sm:text-4xl font-semibold tracking-tighter">Ready to cut your chemical costs and never worry about pre-dip supply again?</h2>
           <p className="mt-4 text-lg text-white/80 max-w-prose mx-auto">Talk to a Recon specialist. We’ll visit your farm, analyze your current usage, and show you the exact numbers for your herd.</p>
 
-          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+          {/* Quick lead capture form (mailto for zero-backend) */}
+          <form
+            className="mt-8 max-w-md mx-auto bg-white/10 rounded-2xl p-4 sm:p-5 text-left"
+            onSubmit={(e) => {
+              e.preventDefault();
+              const form = e.currentTarget as HTMLFormElement;
+              const phone = (form.elements.namedItem('phone') as HTMLInputElement)?.value || '';
+              const herd = (form.elements.namedItem('herd') as HTMLInputElement)?.value || '';
+              const notes = (form.elements.namedItem('notes') as HTMLTextAreaElement)?.value || '';
+              const body = `Phone: ${phone}\nHerd size: ${herd}\nNotes: ${notes}\n\n(From website calculator/landing page)`;
+              window.location.href = `mailto:recon@recontechusa.com?subject=Free%20on-farm%20analysis%20request&body=${encodeURIComponent(body)}`;
+            }}
+          >
+            <div className="text-white/90 text-sm font-semibold mb-3">Request free on-farm analysis</div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <input name="phone" type="tel" required placeholder="Phone number" className="bg-white text-[#0f172a] rounded-lg px-3 py-2 text-sm" />
+              <input name="herd" type="number" placeholder="Herd size (optional)" className="bg-white text-[#0f172a] rounded-lg px-3 py-2 text-sm" />
+            </div>
+            <textarea name="notes" placeholder="Notes (e.g. current pre-dip cost, questions)" className="mt-3 w-full bg-white text-[#0f172a] rounded-lg px-3 py-2 text-sm h-16 resize-y" />
+            <button type="submit" className="mt-3 w-full btn-primary text-base py-2.5">Send request</button>
+            <div className="mt-2 text-[11px] text-white/60 text-center">We’ll follow up within 1 business day. No obligation.</div>
+          </form>
+
+          <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
             <a href="tel:8003384950" className="inline-flex h-14 items-center justify-center rounded-full bg-white text-[#14532d] font-semibold px-9 text-lg hover:bg-white/95 active:bg-white transition">
               Call 800-338-4950
             </a>
