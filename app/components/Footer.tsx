@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -11,58 +12,13 @@ export default function Footer() {
               className="w-16 h-8 flex-shrink-0 overflow-hidden" 
               aria-hidden="true"
             >
-              <svg 
-                viewBox="0 0 190 100" 
-                className="w-full h-full" 
-              >
-                {/* Red field */}
-                <rect width="190" height="100" fill="#B22234" />
-                {/* White stripes */}
-                <rect y="7.69" width="190" height="7.69" fill="#fff" />
-                <rect y="23.08" width="190" height="7.69" fill="#fff" />
-                <rect y="38.46" width="190" height="7.69" fill="#fff" />
-                <rect y="53.85" width="190" height="7.69" fill="#fff" />
-                <rect y="69.23" width="190" height="7.69" fill="#fff" />
-                <rect y="84.62" width="190" height="7.69" fill="#fff" />
-                {/* Blue canton */}
-                <rect width="76" height="53.85" fill="#3C3B6E" />
-                {/* Simplified stars (dots for small size readability) */}
-                <g fill="#fff">
-                  {/* Row 1 */}
-                  <circle cx="8" cy="6" r="2" />
-                  <circle cx="20" cy="6" r="2" />
-                  <circle cx="32" cy="6" r="2" />
-                  <circle cx="44" cy="6" r="2" />
-                  <circle cx="56" cy="6" r="2" />
-                  <circle cx="68" cy="6" r="2" />
-                  {/* Row 2 */}
-                  <circle cx="14" cy="15" r="2" />
-                  <circle cx="26" cy="15" r="2" />
-                  <circle cx="38" cy="15" r="2" />
-                  <circle cx="50" cy="15" r="2" />
-                  <circle cx="62" cy="15" r="2" />
-                  {/* Row 3 */}
-                  <circle cx="8" cy="24" r="2" />
-                  <circle cx="20" cy="24" r="2" />
-                  <circle cx="32" cy="24" r="2" />
-                  <circle cx="44" cy="24" r="2" />
-                  <circle cx="56" cy="24" r="2" />
-                  <circle cx="68" cy="24" r="2" />
-                  {/* Row 4 */}
-                  <circle cx="14" cy="33" r="2" />
-                  <circle cx="26" cy="33" r="2" />
-                  <circle cx="38" cy="33" r="2" />
-                  <circle cx="50" cy="33" r="2" />
-                  <circle cx="62" cy="33" r="2" />
-                  {/* Row 5 */}
-                  <circle cx="8" cy="42" r="2" />
-                  <circle cx="20" cy="42" r="2" />
-                  <circle cx="32" cy="42" r="2" />
-                  <circle cx="44" cy="42" r="2" />
-                  <circle cx="56" cy="42" r="2" />
-                  <circle cx="68" cy="42" r="2" />
-                </g>
-              </svg>
+              <Image 
+                src="/usa-flag.png" 
+                alt="" 
+                width={64} 
+                height={32} 
+                className="w-full h-full object-contain" 
+              />
             </div>
           </div>
           <p className="text-sm text-slate-400 max-w-[26ch] leading-snug">
