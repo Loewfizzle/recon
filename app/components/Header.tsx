@@ -33,7 +33,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-24 flex items-center justify-between">
         {/* Logo - full lockup */}
         <a href="#top" className="flex items-center group" aria-label="Recon Technologies home">
           <Image 
@@ -41,7 +41,7 @@ export default function Header() {
             alt="Recon Technologies" 
             width={759}
             height={281}
-            className="h-10 w-auto md:h-12" 
+            className="h-14 w-auto md:h-16" 
             priority
           />
         </a>
