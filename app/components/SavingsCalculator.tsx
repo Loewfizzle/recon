@@ -199,9 +199,25 @@ export default function SavingsCalculator() {
             </div>
           </div>
 
-          <a href="#contact" className="btn-accent w-full justify-center text-base py-3 mt-1">
+          <button 
+            type="button" 
+            onClick={() => {
+              const contact = document.getElementById('contact');
+              if (contact) {
+                contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+              setTimeout(() => {
+                const herdInput = document.querySelector('input[name="herd"]') as HTMLInputElement | null;
+                if (herdInput) {
+                  herdInput.value = herdSize.toString();
+                  herdInput.focus();
+                }
+              }, 700);
+            }}
+            className="btn-accent w-full justify-center text-base py-3 mt-1"
+          >
             Get a Personalized Quote
-          </a>
+          </button>
           <p className="text-center text-[12px] text-[#64748b]">No obligation. We’ll run the exact numbers for your parlor.</p>
 
           {/* Share / Email results */}

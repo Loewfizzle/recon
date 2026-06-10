@@ -101,6 +101,15 @@ export default function Header() {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden border-t border-slate-200 bg-white mobile-menu">
+          <div className="px-4 py-3 border-b flex items-center gap-2">
+            <Image 
+              src="/logo.png" 
+              alt="Recon Technologies" 
+              width={80} 
+              height={30} 
+              className="h-6 w-auto" 
+            />
+          </div>
           <nav className="px-4 py-4 flex flex-col gap-1 text-[15px] font-medium">
             {navLinks.map((link) => (
               <a
