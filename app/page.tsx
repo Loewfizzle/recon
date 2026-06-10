@@ -5,7 +5,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Modal from './components/Modal';
 import SavingsCalculator from './components/SavingsCalculator';
-import { Check, X, ArrowRight, Users, Clock, Shield, DollarSign, Leaf, Zap } from 'lucide-react';
+import { Check, X, ArrowRight, Users, Clock, Shield, DollarSign, Leaf } from 'lucide-react';
+import DualCellCard from './components/DualCellCard';
 
 // Machine detail content for modals
 const singleCellDetails = (
@@ -43,44 +44,9 @@ const singleCellDetails = (
   </div>
 );
 
-const dualCellDetails = (
-  <div className="space-y-5">
-    <div>
-      <div className="uppercase tracking-[1px] text-xs font-semibold text-[var(--color-accent)]">C200 / DUAL CELL</div>
-      <div className="text-2xl font-semibold tracking-tight mt-1">Maximum output for larger herds &amp; full-parlor use</div>
-    </div>
-
-    <div className="grid grid-cols-2 gap-4 text-sm">
-      <div className="rounded-xl bg-slate-50 p-4">
-        <div className="text-[#64748b] text-xs tracking-wide">275-GALLON TOTE</div>
-        <div className="font-semibold text-xl mt-1 text-[var(--color-brand-blue)]">~53 hours</div>
-      </div>
-      <div className="rounded-xl bg-slate-50 p-4">
-        <div className="text-[#64748b] text-xs tracking-wide">CONCENTRATE OUTPUT</div>
-        <div className="font-semibold text-xl mt-1">55 gal every ~10 hrs</div>
-      </div>
-    </div>
-
-    <div>
-      <div className="font-semibold mb-2">Key Features</div>
-      <ul className="space-y-1.5 text-[15px]">
-        <li className="flex gap-2"><Check className="w-4 h-4 mt-1 text-[#15803d] shrink-0" /> Dual electrolytic cells — nearly 2× the speed</li>
-        <li className="flex gap-2"><Check className="w-4 h-4 mt-1 text-[#15803d] shrink-0" /> Fully automated PLC control</li>
-        <li className="flex gap-2"><Check className="w-4 h-4 mt-1 text-[#15803d] shrink-0" /> Made in the USA with premium components</li>
-        <li className="flex gap-2"><Check className="w-4 h-4 mt-1 text-[#15803d] shrink-0" /> Remote diagnostics + priority support</li>
-        <li className="flex gap-2"><Check className="w-4 h-4 mt-1 text-[#15803d] shrink-0" /> Best for herds 800+ or heavy premise + drop-hose use</li>
-      </ul>
-    </div>
-
-    <div className="pt-2 text-sm border-t">
-      When you need volume fast — for pre-dip, post-dip, calf hutches, sand separators, and full parlor wash — the Dual Cell keeps you ahead of demand.
-    </div>
-  </div>
-);
-
 export default function ReconLanding() {
-  const [modalOpen, setModalOpen] = useState<'single' | 'dual' | null>(null);
-  const openModal = (type: 'single' | 'dual') => setModalOpen(type);
+  const [modalOpen, setModalOpen] = useState<'single' | null>(null);
+  const openModal = () => setModalOpen('single');
   const closeModal = () => setModalOpen(null);
 
   return (
@@ -158,7 +124,7 @@ export default function ReconLanding() {
               <div className="mt-auto pt-6">
                 <div className="text-sm text-[#64748b] mb-3">Price positioning: Strong value, rapid payback for most operations.</div>
                 <div className="flex flex-wrap gap-3">
-                  <button onClick={() => openModal('single')} className="btn-secondary flex-1 sm:flex-none justify-center">
+                  <button onClick={openModal} className="btn-secondary flex-1 sm:flex-none justify-center">
                     Learn More
                   </button>
                   <a href="#calculator" className="btn-primary flex-1 sm:flex-none justify-center">See Savings</a>
@@ -167,30 +133,7 @@ export default function ReconLanding() {
             </div>
 
             {/* Dual Cell Card */}
-            <div className="card p-6 sm:p-7 flex flex-col ring-1 ring-[var(--color-primary)]/10">
-              <div className="flex items-center gap-2">
-                <div className="uppercase text-xs tracking-[1px] font-semibold text-[#0f766e]">DUAL CELL • C200</div>
-                <div className="text-[10px] px-2 py-px rounded bg-[#14532d] text-white font-medium">FASTER</div>
-              </div>
-              <h3 className="text-2xl font-semibold tracking-tight mt-2">Dual Cell Machine</h3>
-              <div className="mt-5 space-y-3 text-[15px]">
-                <div className="flex items-baseline gap-2">
-                  <span className="text-4xl font-semibold tabular-nums text-[var(--color-primary)]">53</span>
-                  <span className="text-[#475569]">hours to fill a 275-gallon tote</span>
-                </div>
-                <div className="text-[#475569]">Nearly twice the speed. Ideal for larger herds and full-parlor chemical programs (pre-dip + wash + hutches).</div>
-              </div>
-
-              <div className="mt-auto pt-6">
-                <div className="text-sm text-[#64748b] mb-3">Price positioning: Higher capacity for operations that value speed and volume.</div>
-                <div className="flex flex-wrap gap-3">
-                  <button onClick={() => openModal('dual')} className="btn-secondary flex-1 sm:flex-none justify-center">
-                    Learn More
-                  </button>
-                  <a href="#calculator" className="btn-primary flex-1 sm:flex-none justify-center">See Savings</a>
-                </div>
-              </div>
-            </div>
+            <DualCellCard />
           </div>
 
           <p className="text-center text-sm text-[#64748b] mt-7">Both machines are fully automated, remotely supported, and backed by our monthly service program. Pricing available on request.</p>
@@ -357,13 +300,6 @@ export default function ReconLanding() {
         title="Single Cell Machine (C100)"
       >
         {singleCellDetails}
-      </Modal>
-      <Modal
-        isOpen={modalOpen === 'dual'}
-        onClose={closeModal}
-        title="Dual Cell Machine (C200)"
-      >
-        {dualCellDetails}
       </Modal>
     </div>
   );
