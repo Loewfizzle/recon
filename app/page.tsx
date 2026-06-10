@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import Header from './components/Header';
@@ -80,6 +80,7 @@ const dualCellDetails = (
 
 export default function ReconLanding() {
   const [modalOpen, setModalOpen] = useState<'single' | 'dual' | null>(null);
+  const [formState, setFormState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
   const openModal = (type: 'single' | 'dual') => setModalOpen(type);
   const closeModal = () => setModalOpen(null);
@@ -263,7 +264,7 @@ export default function ReconLanding() {
             { icon: DollarSign, title: "Dramatic cost reduction", desc: "Produce pre-dip and parlor wash for a fraction of purchased chemical prices. Most dairies recover their investment in months." },
             { icon: Clock, title: "Always fresh, always available", desc: "No delivery delays. No empty totes. Make exactly what you need, when you need it — 24/7." },
             { icon: Shield, title: "Proven & supported", desc: "Machines engineered for dairy environments. Full warranty, monthly service plan, and remote internet-based support from our Michigan team." },
-            { icon: Users, title: "Built by dairy people", desc: "We’ve been serving producers since 2008. We understand parlor workflows, mastitis prevention, and the real economics of your operation." },
+            { icon: Users, title: "Built by dairy people", desc: "We've been serving producers since 2008. We understand parlor workflows, mastitis prevention, and the real economics of your operation." },
           ].map((benefit, i) => (
             <div key={i} className="card p-6">
               <div className="w-10 h-10 rounded-2xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center mb-4">
@@ -309,30 +310,49 @@ export default function ReconLanding() {
       <section id="contact" className="py-14 sm:py-16 border-b bg-[#14532d] text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <h2 className="text-3xl sm:text-4xl font-semibold tracking-tighter">Ready to cut your chemical costs and never worry about pre-dip supply again?</h2>
-          <p className="mt-4 text-lg text-white/80 max-w-prose mx-auto">Talk to a Recon specialist. We’ll visit your farm, analyze your current usage, and show you the exact numbers for your herd.</p>
+          <p className="mt-4 text-lg text-white/80 max-w-prose mx-auto">Talk to a Recon specialist. We'll visit your farm, analyze your current usage, and show you the exact numbers for your herd.</p>
 
-          {/* Quick lead capture form (mailto for zero-backend) */}
-          <form
-            className="mt-8 max-w-md mx-auto bg-white/10 rounded-2xl p-4 sm:p-5 text-left"
-            onSubmit={(e) => {
-              e.preventDefault();
-              const form = e.currentTarget as HTMLFormElement;
-              const phone = (form.elements.namedItem('phone') as HTMLInputElement)?.value || '';
-              const herd = (form.elements.namedItem('herd') as HTMLInputElement)?.value || '';
-              const notes = (form.elements.namedItem('notes') as HTMLTextAreaElement)?.value || '';
-              const body = `Phone: ${phone}\nHerd size: ${herd}\nNotes: ${notes}\n\n(From website calculator/landing page)`;
-              window.location.href = `mailto:recon@recontechusa.com?subject=Free%20on-farm%20analysis%20request&body=${encodeURIComponent(body)}`;
-            }}
-          >
-            <div className="text-white/90 text-sm font-semibold mb-3">Request free on-farm analysis</div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <input name="phone" type="tel" required placeholder="Phone number" className="bg-white text-[#0f172a] rounded-lg px-3 py-2 text-sm" />
-              <input name="herd" type="number" placeholder="Herd size (optional)" className="bg-white text-[#0f172a] rounded-lg px-3 py-2 text-sm" />
+          {/* Lead capture form — posts to Formspree (replace YOUR_FORM_ID at formspree.io) */}
+          {formState === 'success' ? (
+            <div className="mt-8 max-w-md mx-auto bg-white/10 rounded-2xl p-6 text-center">
+              <div className="text-2xl mb-2">✓</div>
+              <div className="font-semibold text-white text-lg">We got your request!</div>
+              <p className="mt-1 text-white/70 text-sm">A Recon specialist will follow up within 1 business day.</p>
+              <button onClick={() => setFormState('idle')} className="mt-4 text-sm text-white/60 underline underline-offset-2">Submit another</button>
             </div>
-            <textarea name="notes" placeholder="Notes (e.g. current pre-dip cost, questions)" className="mt-3 w-full bg-white text-[#0f172a] rounded-lg px-3 py-2 text-sm h-16 resize-y" />
-            <button type="submit" className="mt-3 w-full btn-primary text-base py-2.5">Send request</button>
-            <div className="mt-2 text-[11px] text-white/60 text-center">We’ll follow up within 1 business day. No obligation.</div>
-          </form>
+          ) : (
+            <form
+              className="mt-8 max-w-md mx-auto bg-white/10 rounded-2xl p-4 sm:p-5 text-left"
+              onSubmit={async (e) => {
+                e.preventDefault();
+                setFormState('loading');
+                try {
+                  const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+                    method: 'POST',
+                    body: new FormData(e.currentTarget as HTMLFormElement),
+                    headers: { Accept: 'application/json' },
+                  });
+                  setFormState(res.ok ? 'success' : 'error');
+                } catch {
+                  setFormState('error');
+                }
+              }}
+            >
+              <div className="text-white/90 text-sm font-semibold mb-3">Request free on-farm analysis</div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <input name="phone" type="tel" required placeholder="Phone number" className="bg-white text-[#0f172a] rounded-lg px-3 py-2 text-sm" />
+                <input name="herd" type="number" placeholder="Herd size (optional)" className="bg-white text-[#0f172a] rounded-lg px-3 py-2 text-sm" />
+              </div>
+              <textarea name="notes" placeholder="Notes (e.g. current pre-dip cost, questions)" className="mt-3 w-full bg-white text-[#0f172a] rounded-lg px-3 py-2 text-sm h-16 resize-y" />
+              <button type="submit" disabled={formState === 'loading'} className="mt-3 w-full btn-primary text-base py-2.5 disabled:opacity-60">
+                {formState === 'loading' ? 'Sending…' : 'Send request'}
+              </button>
+              {formState === 'error' && (
+                <p className="mt-2 text-red-300 text-xs text-center">Something went wrong — please call us at 800-338-4950.</p>
+              )}
+              <div className="mt-2 text-[11px] text-white/60 text-center">We'll follow up within 1 business day. No obligation.</div>
+            </form>
+          )}
 
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
             <a href="tel:8003384950" className="inline-flex h-14 items-center justify-center rounded-full bg-white text-[#14532d] font-semibold px-9 text-lg hover:bg-white/95 active:bg-white transition">
