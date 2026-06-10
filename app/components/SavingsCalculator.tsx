@@ -147,7 +147,10 @@ export default function SavingsCalculator() {
                   type="number"
                   step="0.01"
                   value={variablePerCow}
-                  onChange={(e) => setVariablePerCow(parseFloat(e.target.value) || 0.92)}
+                  onChange={(e) => {
+                    const val = parseFloat(e.target.value);
+                    setVariablePerCow(isNaN(val) ? 0.92 : val);
+                  }}
                   className="input-number w-full"
                 />
               </div>
@@ -156,7 +159,10 @@ export default function SavingsCalculator() {
                 <input
                   type="number"
                   value={serviceFee}
-                  onChange={(e) => setServiceFee(parseInt(e.target.value) || 189)}
+                  onChange={(e) => {
+                    const val = parseInt(e.target.value, 10);
+                    setServiceFee(isNaN(val) ? 189 : val);
+                  }}
                   className="input-number w-full"
                 />
               </div>
@@ -206,13 +212,16 @@ export default function SavingsCalculator() {
               if (contact) {
                 contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
               }
-              setTimeout(() => {
-                const herdInput = document.querySelector('input[name="herd"]') as HTMLInputElement | null;
-                if (herdInput) {
-                  herdInput.value = herdSize.toString();
-                  herdInput.focus();
-                }
-              }, 700);
+              // Use rAF to wait for scroll/layout to settle before querying DOM
+              requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                  const herdInput = document.querySelector('input[name="herd"]') as HTMLInputElement | null;
+                  if (herdInput) {
+                    herdInput.value = herdSize.toString();
+                    herdInput.focus();
+                  }
+                });
+              });
             }}
             className="btn-accent w-full justify-center text-base py-3 mt-1"
           >
