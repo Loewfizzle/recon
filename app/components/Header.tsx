@@ -37,7 +37,7 @@ export default function Header() {
         {/* Logo - full lockup */}
         <a href="#top" className="flex items-center group" aria-label="Recon Technologies home">
           <Image 
-            src="/logo.svg" 
+            src="/logo.png" 
             alt="Recon Technologies" 
             width={0}
             height={0}

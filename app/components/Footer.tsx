@@ -8,7 +8,7 @@ export default function Footer() {
         <div>
           <div className="flex items-center gap-2 mb-3">
             <Image 
-              src="/logo.svg" 
+              src="/logo.png" 
               alt="Recon Technologies" 
               width={0}
               height={0}
