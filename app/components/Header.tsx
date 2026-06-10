@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
+import Image from 'next/image';
 
 const navLinks = [
   { href: '#machines', label: 'Machines' },
@@ -33,20 +34,15 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <a href="#top" className="flex items-center gap-2.5 group" aria-label="Recon Technologies home">
-          <div className="w-9 h-9 rounded-xl bg-[#14532d] flex items-center justify-center">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-              <path d="M12 3L4 8.5V18L12 22L20 18V8.5L12 3Z" stroke="white" strokeWidth="1.8" strokeLinejoin="round"/>
-              <path d="M12 12L20 8.5" stroke="white" strokeWidth="1.6" strokeLinejoin="round"/>
-              <path d="M12 22V12" stroke="white" strokeWidth="1.6"/>
-              <circle cx="12" cy="7" r="1.6" fill="#14b8a6"/>
-            </svg>
-          </div>
-          <div className="leading-none">
-            <div className="font-semibold tracking-[-0.5px] text-2xl text-[#14532d] group-hover:text-[#0f3d22] transition-colors">RECON</div>
-            <div className="text-[10px] font-medium text-[#0f766e] -mt-1 tracking-[1.5px]">TECHNOLOGIES</div>
-          </div>
+        {/* Logo - full lockup */}
+        <a href="#top" className="flex items-center group" aria-label="Recon Technologies home">
+          <Image 
+            src="/logo.svg" 
+            alt="Recon Technologies" 
+            width={0}
+            height={0}
+            className="h-8 w-auto" 
+          />
         </a>
 
         {/* Desktop Navigation */}

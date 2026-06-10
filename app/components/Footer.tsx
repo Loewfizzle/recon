@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -6,14 +7,13 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 grid gap-y-10 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.25" strokeLinejoin="round">
-                <path d="M12 3L4 8.5V18L12 22L20 18V8.5L12 3Z" />
-                <path d="M12 12L20 8.5" />
-                <path d="M12 22V12" />
-              </svg>
-            </div>
-            <span className="font-semibold text-white tracking-tight text-xl">RECON</span>
+            <Image 
+              src="/logo.svg" 
+              alt="Recon Technologies" 
+              width={0}
+              height={0}
+              className="h-7 w-auto" 
+            />
           </div>
           <p className="text-sm text-slate-400 max-w-[18ch]">
             On-site sodium hypochlorite generation for dairy farms since 2008.
