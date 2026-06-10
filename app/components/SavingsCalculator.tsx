@@ -137,18 +137,18 @@ export default function SavingsCalculator() {
             </div>
             <div className="rounded-2xl border border-slate-200 p-4">
               <div className="text-xs uppercase tracking-widest text-[#64748b] mb-1">RECON MONTHLY COST</div>
-              <div className="text-3xl font-semibold tabular-nums text-[#14532d]">{formatCurrency(reconMonthly)}</div>
+              <div className="text-3xl font-semibold tabular-nums text-[var(--color-brand-blue)]">{formatCurrency(reconMonthly)}</div>
               <div className="text-[11px] text-[#64748b] mt-0.5">All-in (generation + support)</div>
             </div>
           </div>
 
-          <div className="flex items-center gap-3 rounded-2xl bg-white border border-[#14532d]/15 p-4 text-sm">
-            <div className="shrink-0 p-2 bg-[#14532d] rounded-xl text-white">
+          <div className="flex items-center gap-3 rounded-2xl bg-white border border-[var(--color-brand-blue)]/15 p-4 text-sm">
+            <div className="shrink-0 p-2 bg-[var(--color-brand-blue)] rounded-xl text-white">
               <DollarSign className="w-4 h-4" />
             </div>
             <div>
               <span className="font-semibold">Recommended for your herd:</span>{' '}
-              <span className="font-semibold text-[#14532d]">{recommended}</span> Machine
+              <span className="font-semibold text-[var(--color-brand-blue)]">{recommended}</span> Machine
             </div>
           </div>
 

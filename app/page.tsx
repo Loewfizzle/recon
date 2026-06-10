@@ -18,7 +18,7 @@ const singleCellDetails = (
     <div className="grid grid-cols-2 gap-4 text-sm">
       <div className="rounded-xl bg-slate-50 p-4">
         <div className="text-[#64748b] text-xs tracking-wide">275-GALLON TOTE</div>
-        <div className="font-semibold text-xl mt-1 text-[#14532d]">~103 hours</div>
+        <div className="font-semibold text-xl mt-1 text-[var(--color-brand-blue)]">~103 hours</div>
       </div>
       <div className="rounded-xl bg-slate-50 p-4">
         <div className="text-[#64748b] text-xs tracking-wide">CONCENTRATE OUTPUT</div>
@@ -53,7 +53,7 @@ const dualCellDetails = (
     <div className="grid grid-cols-2 gap-4 text-sm">
       <div className="rounded-xl bg-slate-50 p-4">
         <div className="text-[#64748b] text-xs tracking-wide">275-GALLON TOTE</div>
-        <div className="font-semibold text-xl mt-1 text-[#14532d]">~53 hours</div>
+        <div className="font-semibold text-xl mt-1 text-[var(--color-brand-blue)]">~53 hours</div>
       </div>
       <div className="rounded-xl bg-slate-50 p-4">
         <div className="text-[#64748b] text-xs tracking-wide">CONCENTRATE OUTPUT</div>
@@ -211,7 +211,7 @@ export default function ReconLanding() {
           <div className="hidden sm:grid grid-cols-3 bg-slate-50 px-5 py-3 text-sm font-semibold text-[#334155] border-b">
             <div>Factor</div>
             <div>Traditional Iodine</div>
-            <div className="text-[#14532d]">Recon HOCl (ECActiv)</div>
+            <div className="text-[var(--color-brand-blue)]">Recon HOCl (ECActiv)</div>
           </div>
 
           {/* Rows */}
@@ -229,7 +229,7 @@ export default function ReconLanding() {
               <div className="flex items-start gap-2 text-[#64748b]">
                 <X className="w-4 h-4 mt-0.5 text-red-500/70 shrink-0" /> {iodine}
               </div>
-              <div className="flex items-start gap-2 text-[#14532d] font-medium">
+              <div className="flex items-start gap-2 text-[var(--color-brand-blue)] font-medium">
                 <Check className="w-4 h-4 mt-0.5 text-[#15803d] shrink-0" /> {hocl}
               </div>
             </div>

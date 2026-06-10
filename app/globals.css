@@ -4,11 +4,17 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
-  /* Recon agricultural / dairy tech palette - clean, professional, trustworthy */
-  --color-primary: #14532d;      /* Deep forest green */
+  /* Recon agricultural / dairy tech palette - clean, professional, trustworthy
+     Primary green for farm/ag trust + CTAs.
+     Teal accent for clean/sanitary HOCl feel.
+     Brand blue added to harmonize with the official full-lockup logo (cow + TECHNOLOGIES).
+     Use brand-blue for "Recon" specific elements, secondary highlights, and logo-adjacent UI. */
+  --color-primary: #14532d;      /* Deep forest green - agriculture, farm, trustworthy */
   --color-primary-dark: #0f3d22;
-  --color-accent: #0f766e;       /* Teal - clean, sanitary, HOCl feel */
+  --color-accent: #0f766e;       /* Teal - clean, sanitary, fresh HOCl feel */
   --color-accent-light: #14b8a6;
+  --color-brand-blue: #1e3a5f;   /* Deep blue from logo (cow outline + TECHNOLOGIES) - harmonizes the full lockup */
+  --color-brand-blue-dark: #162d4a;
   --color-text: #0f172a;         /* Slate-950 */
   --color-text-muted: #475569;   /* Slate-600 */
   --color-bg: #f8fafc;           /* Slate-50 - clean off-white */
