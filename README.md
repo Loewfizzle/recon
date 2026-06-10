@@ -48,7 +48,7 @@ app/
 
 - Update contact info (phone, email) in Header, Footer, and CTA sections.
 - Tweak calculator assumptions in `SavingsCalculator.tsx` when real pricing data is available.
-- Replace the inline logo SVG with the official Recon logo asset.
+- Logo is at `public/logo.png` (full lockup). If you swap the file, update the `src="/logo.png"` in `app/components/Header.tsx` and `Footer.tsx`.
 - Add a real `og-image.png` in `/public` for social sharing.
 
 ## Deployment
