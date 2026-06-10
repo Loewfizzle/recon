@@ -6,9 +6,9 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 grid gap-y-10 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <div className="flex items-center gap-2 mb-3">
-            {/* American flag icon (replaces logo in footer) */}
+            {/* American flag icon (replaces logo in footer) - larger on mobile */}
             <div 
-              className="w-11 h-6 flex-shrink-0 overflow-hidden" 
+              className="w-16 h-8 flex-shrink-0 overflow-hidden" 
               aria-hidden="true"
             >
               <svg 
@@ -65,7 +65,7 @@ export default function Footer() {
               </svg>
             </div>
           </div>
-          <p className="text-sm text-slate-400 max-w-[22ch]">
+          <p className="text-sm text-slate-400 max-w-[26ch] leading-snug">
             Proudly engineered and made in the USA
           </p>
         </div>
