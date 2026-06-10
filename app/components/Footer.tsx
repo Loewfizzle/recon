@@ -10,9 +10,9 @@ export default function Footer() {
             <Image 
               src="/logo.png" 
               alt="Recon Technologies" 
-              width={0}
-              height={0}
-              className="h-7 w-auto" 
+              width={759}
+              height={281}
+              className="h-9 w-auto" 
             />
           </div>
           <p className="text-sm text-slate-400 max-w-[18ch]">
