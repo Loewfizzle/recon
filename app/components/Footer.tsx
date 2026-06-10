@@ -8,7 +8,7 @@ export default function Footer() {
           <div className="flex items-center gap-2 mb-3">
             {/* American flag icon (replaces logo in footer) */}
             <div 
-              className="w-8 h-5 flex-shrink-0 overflow-hidden rounded-sm border border-white/20 shadow-sm" 
+              className="w-11 h-6 flex-shrink-0 overflow-hidden" 
               aria-hidden="true"
             >
               <svg 
