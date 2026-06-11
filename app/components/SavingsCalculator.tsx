@@ -1,16 +1,20 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Calculator, TrendingUp, DollarSign } from 'lucide-react';
 
 type AppMethod = 'robot' | 'foamers' | 'spray' | 'cups';
 
-const APP_METHODS: { value: AppMethod; label: string; ml: number }[] = [
-  { value: 'robot',   label: 'Robot',        ml: 15 },
-  { value: 'foamers', label: 'Foamers',      ml: 6  },
-  { value: 'spray',   label: 'Manual Spray', ml: 17 },
-  { value: 'cups',    label: 'Dip Cups',     ml: 12 },
+const APP_METHODS: { value: AppMethod; label: string; ml: number; reconCostPerGal: number }[] = [
+  { value: 'robot',   label: 'Robot',        ml: 15, reconCostPerGal: 0.185 },
+  { value: 'foamers', label: 'Foamers',      ml: 6,  reconCostPerGal: 0.585 },
+  { value: 'spray',   label: 'Manual Spray', ml: 17, reconCostPerGal: 0.185 },
+  { value: 'cups',    label: 'Dip Cups',     ml: 12, reconCostPerGal: 0.185 },
 ];
+
+const TEATS_PER_COW  = 4;
+const ML_PER_GALLON  = 3785;
+const DAYS_PER_MONTH = 30;
 
 function loadSaved() {
   if (typeof window === 'undefined') return {};
@@ -22,23 +26,48 @@ function loadSaved() {
 }
 
 export default function SavingsCalculator() {
-  const [herdSize,    setHerdSize]    = useState<number>(() => loadSaved().herd      || 620);
-  const [herdRaw,     setHerdRaw]     = useState<string>(() => String(loadSaved().herd || 620));
-  const [method,      setMethod]      = useState<AppMethod>(() => loadSaved().method  || 'foamers');
-  const [rtuPrice,    setRtuPrice]    = useState<number>(() => loadSaved().rtuPrice  || 2.50);
-  const [rtuRaw,      setRtuRaw]      = useState<string>(() => String(loadSaved().rtuPrice || 2.50));
-  const [milkings,    setMilkings]    = useState<2 | 3>(() => loadSaved().milkings  || 2);
+  const [herdSize, setHerdSize] = useState<number>(() => loadSaved().herd     || 620);
+  const [herdRaw,  setHerdRaw]  = useState<string>(() => String(loadSaved().herd || 620));
+  const [method,   setMethod]   = useState<AppMethod>(() => loadSaved().method || 'foamers');
+  const [rtuPrice, setRtuPrice] = useState<number>(() => loadSaved().rtuPrice  || 2.50);
+  const [rtuRaw,   setRtuRaw]   = useState<string>(() => String(loadSaved().rtuPrice || 2.50));
+  const [milkings, setMilkings] = useState<2 | 3>(() => loadSaved().milkings  || 2);
 
   useEffect(() => {
     localStorage.setItem('reconCalculator', JSON.stringify({
-      herd:     herdSize,
-      method,
-      rtuPrice,
-      milkings,
+      herd: herdSize, method, rtuPrice, milkings,
     }));
   }, [herdSize, method, rtuPrice, milkings]);
 
-  const methodLabel = APP_METHODS.find(m => m.value === method)?.label ?? method;
+  const selectedMethod = APP_METHODS.find(m => m.value === method)!;
+
+  const { gallonsPerMonth, currentMonthly, reconMonthly, monthlySavings, annualSavings, percentSavings } = useMemo(() => {
+    const milkingsPerMonth  = milkings * DAYS_PER_MONTH;
+    const totalMl           = herdSize * TEATS_PER_COW * selectedMethod.ml * milkingsPerMonth;
+    const gallonsPerMonth   = totalMl / ML_PER_GALLON;
+    const currentMonthly    = gallonsPerMonth * rtuPrice;
+    const reconMonthly      = gallonsPerMonth * selectedMethod.reconCostPerGal;
+    const monthlySavings    = Math.max(0, currentMonthly - reconMonthly);
+    const annualSavings     = monthlySavings * 12;
+    const percentSavings    = currentMonthly > 0 ? Math.round((monthlySavings / currentMonthly) * 100) : 0;
+    return { gallonsPerMonth, currentMonthly, reconMonthly, monthlySavings, annualSavings, percentSavings };
+  }, [herdSize, milkings, rtuPrice, selectedMethod]);
+
+  const fmt = (n: number) =>
+    new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
+
+  const copyText = [
+    `Recon Savings Estimate`,
+    `Herd: ${herdSize} cows`,
+    `Method: ${selectedMethod.label}`,
+    `Current RTU price: $${rtuPrice.toFixed(2)}/gal`,
+    `Milkings/day: ${milkings}x`,
+    `Estimated gallons/month: ${Math.round(gallonsPerMonth)}`,
+    `Current monthly cost: ${fmt(currentMonthly)}`,
+    `Recon monthly cost: ${fmt(reconMonthly)}`,
+    `Monthly savings: ${fmt(monthlySavings)} (${percentSavings}%)`,
+    `Annual savings: ${fmt(annualSavings)}`,
+  ].join('\n');
 
   return (
     <div className="card p-6 sm:p-8">
@@ -54,7 +83,7 @@ export default function SavingsCalculator() {
 
       <div className="grid gap-8 lg:grid-cols-5">
 
-        {/* Controls */}
+        {/* Inputs */}
         <div className="lg:col-span-3 space-y-7">
 
           {/* Herd Size + Milkings Per Day */}
@@ -121,7 +150,7 @@ export default function SavingsCalculator() {
                   }`}
                 >
                   <div className="font-semibold">{label}</div>
-                  <div className="text-xs text-[#64748b] mt-0.5">{ml} ml/cow</div>
+                  <div className="text-xs text-[#64748b] mt-0.5">{ml} ml/teat</div>
                 </button>
               ))}
             </div>
@@ -146,7 +175,7 @@ export default function SavingsCalculator() {
                   setRtuPrice(clean);
                   setRtuRaw(String(clean));
                 }}
-                className="input-number pl-7 w-full"
+                className="input-number input-currency w-full"
                 aria-label="Current pre-dip price per gallon RTU"
               />
             </div>
@@ -154,34 +183,39 @@ export default function SavingsCalculator() {
 
         </div>
 
-        {/* Results — placeholder until calculation logic is wired */}
+        {/* Results */}
         <div className="lg:col-span-2 space-y-4">
+
+          {/* Monthly Savings — hero */}
           <div className="rounded-2xl bg-[#f1f5f9] p-5">
             <div className="uppercase text-[10px] tracking-[1.5px] font-semibold text-[#0f766e] mb-1">ESTIMATED MONTHLY SAVINGS</div>
-            <div className="savings-value tabular-nums text-[#94a3b8]">—</div>
-            <div className="mt-1 text-sm text-[#94a3b8] flex items-center gap-1.5">
-              <TrendingUp className="w-4 h-4" /> Calculation coming soon
+            <div className="savings-value tabular-nums">{fmt(monthlySavings)}</div>
+            <div className="mt-1 text-sm text-[#15803d] font-medium flex items-center gap-1.5">
+              <TrendingUp className="w-4 h-4" /> {percentSavings}% lower than current spend
             </div>
           </div>
 
+          {/* Annual + Recon cost */}
           <div className="grid grid-cols-2 gap-4">
             <div className="rounded-2xl border border-slate-200 p-4">
               <div className="text-xs uppercase tracking-widest text-[#64748b] mb-1">ANNUAL SAVINGS</div>
-              <div className="text-3xl font-semibold tabular-nums text-[#94a3b8]">—</div>
+              <div className="text-3xl font-semibold tabular-nums text-[#14532d]">{fmt(annualSavings)}</div>
             </div>
             <div className="rounded-2xl border border-slate-200 p-4">
-              <div className="text-xs uppercase tracking-widest text-[#64748b] mb-1">RECON MONTHLY COST</div>
-              <div className="text-3xl font-semibold tabular-nums text-[#94a3b8]">—</div>
-              <div className="text-[11px] text-[#64748b] mt-0.5">Estimated</div>
+              <div className="text-xs uppercase tracking-widest text-[#64748b] mb-1">RECON MONTHLY</div>
+              <div className="text-3xl font-semibold tabular-nums text-[var(--color-brand-blue)]">{fmt(reconMonthly)}</div>
             </div>
           </div>
 
-          <div className="flex items-center gap-3 rounded-2xl bg-white border border-[var(--color-brand-blue)]/15 p-4 text-sm">
-            <div className="shrink-0 p-2 bg-[var(--color-brand-blue)] rounded-xl text-white">
+          {/* Current monthly cost */}
+          <div className="flex items-center gap-3 rounded-2xl bg-white border border-slate-200 p-4 text-sm">
+            <div className="shrink-0 p-2 bg-slate-100 rounded-xl text-[#475569]">
               <DollarSign className="w-4 h-4" />
             </div>
-            <div className="text-[#475569]">
-              Machine recommendation will appear once calculated.
+            <div>
+              <span className="text-[#64748b]">Your current monthly cost: </span>
+              <span className="font-semibold text-[#334155]">{fmt(currentMonthly)}</span>
+              <span className="text-[#64748b] text-xs ml-1">({Math.round(gallonsPerMonth)} gal/mo)</span>
             </div>
           </div>
 
@@ -209,8 +243,7 @@ export default function SavingsCalculator() {
           <div className="pt-3 border-t flex gap-2">
             <button
               onClick={() => {
-                const text = `Recon Savings Estimate\nHerd: ${herdSize} cows\nMethod: ${methodLabel}\nCurrent RTU price: $${rtuPrice.toFixed(2)}/gal\nMilkings/day: ${milkings}x\nMonthly savings: —\nAnnual savings: —`;
-                navigator.clipboard?.writeText(text);
+                navigator.clipboard?.writeText(copyText);
                 alert('Results copied to clipboard!');
               }}
               className="btn-secondary text-sm flex-1 justify-center"
@@ -218,19 +251,18 @@ export default function SavingsCalculator() {
               Copy results
             </button>
             <a
-              href={`mailto:?subject=Recon%20Savings%20Estimate&body=${encodeURIComponent(
-                `Herd: ${herdSize} cows\nApplication method: ${methodLabel}\nCurrent RTU price: $${rtuPrice.toFixed(2)}/gal\nMilkings/day: ${milkings}x\n\n(Visit recon.loewfizzle.com to see full savings estimate.)`
-              )}`}
+              href={`mailto:?subject=Recon%20Savings%20Estimate&body=${encodeURIComponent(copyText + '\n\n(Visit recon.loewfizzle.com to calculate your own estimate.)')}`}
               className="btn-secondary text-sm flex-1 justify-center"
             >
               Email results
             </a>
           </div>
+
         </div>
       </div>
 
       <div className="mt-6 pt-4 border-t text-[11px] text-[#94a3b8] leading-snug">
-        Application volume assumptions: Robot 15 ml · Foamers 6 ml · Manual Spray 17 ml · Dip Cups 12 ml per cow per milking. RTU = ready-to-use dilution.
+        Application volume assumptions: Robot 15 ml · Foamers 6 ml · Manual Spray 17 ml · Dip Cups 12 ml per teat per milking. Recon cost includes PH activator, sodium hypochlorite, and surfactant. RTU = ready-to-use.
       </div>
     </div>
   );
