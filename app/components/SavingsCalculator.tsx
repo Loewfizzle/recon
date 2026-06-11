@@ -31,7 +31,7 @@ export default function SavingsCalculator() {
   const [method,   setMethod]   = useState<AppMethod>(() => loadSaved().method || 'foamers');
   const [rtuPrice, setRtuPrice] = useState<number>(() => loadSaved().rtuPrice  || 2.50);
   const [rtuRaw,   setRtuRaw]   = useState<string>(() => String(loadSaved().rtuPrice || 2.50));
-  const [milkings, setMilkings] = useState<2 | 3>(() => loadSaved().milkings  || 2);
+  const [milkings, setMilkings] = useState<2 | 3>(() => loadSaved().milkings  || 3);
 
   useEffect(() => {
     localStorage.setItem('reconCalculator', JSON.stringify({
