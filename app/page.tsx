@@ -139,6 +139,8 @@ export default function ReconLanding() {
             ['Cow comfort', 'Can dry or irritate teats over time', 'Gentle on teat skin, excellent condition'],
             ['Handling & storage', 'Hazardous, heavy drums/totes', 'Make only what you need, minimal storage'],
             ['Environmental impact', 'Chemical residues & transport', 'Biodegradable, minimal footprint'],
+            ['Staining', 'Stains equipment, clothing, and hands — hard to remove', 'No staining on equipment, clothing, or hands'],
+            ['Odor', 'Offensive iodine odor that clings to skin and clothes', 'Fresh, clean smell — no lingering odor'],
           ].map(([factor, iodine, hocl], idx) => (
             <div key={idx} className="compare-row">
               <div className="font-medium text-[#334155]">{factor}</div>
