@@ -26,8 +26,8 @@ function loadSaved() {
 }
 
 export default function SavingsCalculator() {
-  const [herdSize, setHerdSize] = useState<number>(() => loadSaved().herd     || 620);
-  const [herdRaw,  setHerdRaw]  = useState<string>(() => String(loadSaved().herd || 620));
+  const [herdSize, setHerdSize] = useState<number>(() => loadSaved().herd     || 2000);
+  const [herdRaw,  setHerdRaw]  = useState<string>(() => String(loadSaved().herd || 2000));
   const [method,   setMethod]   = useState<AppMethod>(() => loadSaved().method || 'robot');
   const [rtuPrice, setRtuPrice] = useState<number>(() => loadSaved().rtuPrice  || 2.50);
   const [rtuRaw,   setRtuRaw]   = useState<string>(() => (loadSaved().rtuPrice || 2.50).toFixed(2));

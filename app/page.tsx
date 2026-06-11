@@ -135,7 +135,6 @@ export default function ReconLanding() {
             </div>
           ))}
         </div>
-        <p className="text-xs text-center mt-3 text-[#64748b]">Data based on field experience and customer reports across hundreds of dairies.</p>
       </section>
 
       {/* HOW IT WORKS */}
