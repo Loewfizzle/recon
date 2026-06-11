@@ -109,6 +109,7 @@ export default function SingleCellCard() {
             width={800}
             height={500}
             className="w-full h-auto"
+            priority
           />
         </div>
 
