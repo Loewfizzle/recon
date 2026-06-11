@@ -65,6 +65,7 @@ function ModalContent({ onRequestQuote }: { onRequestQuote: () => void }) {
             <div className="text-xs text-[#64748b] mt-0.5">to fill completely</div>
           </div>
         </div>
+        <p className="text-xs text-[#64748b] mt-2">Concentrate output — yields approximately 1,925 gal RTU per tote (6:1 dilution).</p>
       </section>
 
       {/* Who It&apos;s For */}
@@ -128,6 +129,7 @@ export default function SingleCellCard() {
 
           <div className="mt-auto pt-6 flex flex-wrap gap-3">
             <button
+              type="button"
               onClick={() => setOpen(true)}
               className="btn-secondary flex-1 sm:flex-none justify-center"
             >

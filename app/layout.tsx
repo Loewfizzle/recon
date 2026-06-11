@@ -20,9 +20,8 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
   },
   openGraph: {
-    title: "Recon Technologies | On-Farm Sodium Hypochlorite for Dairy",
-    description: "On-site ECA generation for fresh, low-cost teat dip. Single & Dual Cell machines. Calculate your savings today.",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Recon Technologies — On-site HOCl generation for dairy farms" }],
+    title: "Recon Technologies | On-Farm Hypochlorous Acid for Dairy",
+    description: "On-site generation of fresh hypochlorous acid (HOCl) for teat dip and parlor cleaning. Single & Dual Cell machines. Calculate your savings today.",
   },
 };
 

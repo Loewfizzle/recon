@@ -28,9 +28,9 @@ function loadSaved() {
 export default function SavingsCalculator() {
   const [herdSize, setHerdSize] = useState<number>(() => loadSaved().herd     || 620);
   const [herdRaw,  setHerdRaw]  = useState<string>(() => String(loadSaved().herd || 620));
-  const [method,   setMethod]   = useState<AppMethod>(() => loadSaved().method || 'foamers');
+  const [method,   setMethod]   = useState<AppMethod>(() => loadSaved().method || 'robot');
   const [rtuPrice, setRtuPrice] = useState<number>(() => loadSaved().rtuPrice  || 2.50);
-  const [rtuRaw,   setRtuRaw]   = useState<string>(() => String(loadSaved().rtuPrice || 2.50));
+  const [rtuRaw,   setRtuRaw]   = useState<string>(() => (loadSaved().rtuPrice || 2.50).toFixed(2));
   const [milkings, setMilkings] = useState<2 | 3>(() => loadSaved().milkings  || 3);
 
   useEffect(() => {
@@ -227,7 +227,7 @@ export default function SavingsCalculator() {
               if (contact) contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
               requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
-                  const herdInput = document.querySelector('input[name="herd"]') as HTMLInputElement | null;
+                  const herdInput = document.querySelector('#contact input[name="herd"]') as HTMLInputElement | null;
                   if (herdInput) {
                     herdInput.value = herdSize.toString();
                     herdInput.focus();
@@ -243,10 +243,11 @@ export default function SavingsCalculator() {
 
           <div className="pt-3 border-t">
             <button
+              type="button"
               onClick={async () => {
                 const shareData = {
                   title: 'Recon Savings Estimate',
-                  text: copyText + '\n\n(Visit recon.loewfizzle.com to calculate your own estimate.)',
+                  text: copyText + `\n\n(Visit ${window.location.origin} to calculate your own estimate.)`,
                 };
                 if (navigator.share) {
                   try {

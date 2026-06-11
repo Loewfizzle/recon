@@ -151,7 +151,7 @@ export default function ReconLanding() {
               { num: '1', title: 'We install the machine', desc: 'Our technicians deliver and set up your ECALogical generator with proper water softening and electrical connections.' },
               { num: '2', title: 'Add brine additive', desc: 'Simply load the food-grade salt-based additive into the machine. One container lasts days or weeks depending on usage.' },
               { num: '3', title: 'Machine generates sodium hypochlorite', desc: 'Fully automated. The system produces concentrated sodium hypochlorite on a continuous schedule with zero daily intervention.' },
-              { num: '4', title: 'Blend with PH Activator & use', desc: 'Combine the sodium hypochlorite concentrate with Recon\'s PH Activator at the correct ratio to produce fresh HOCl pre-dip. Use for pre-dip, post-dip, premise wash, calf hutches, or drop hoses.' },
+              { num: '4', title: 'Blend with PH Activator & use', desc: 'Combine the sodium hypochlorite concentrate with Recon\'s PH Activator at the correct ratio to produce fresh HOCl pre-dip. Use for pre-dip, premise wash, calf stalls, or drop hoses.' },
             ].map((step, index) => (
               <div key={index} className="step">
                 <div className="step-number">{step.num}</div>
@@ -210,8 +210,10 @@ export default function ReconLanding() {
         <div className="max-w-3xl">
           <div className="uppercase tracking-[2px] text-xs font-semibold text-[#0f766e]">SINCE 2008 • GRAND RAPIDS, MICHIGAN</div>
           <h2 className="section-title mt-3">We build the machines that let dairy farmers take control of their chemistry.</h2>
-          <p className="mt-4 text-[15.5px] leading-relaxed text-[#334155]">
+          <p className="mt-4 text-[15px] leading-relaxed text-[#334155]">
             Recon Technologies manufactures ECALogical on-site generators that produce sodium hypochlorite from salt, water, and electricity. Combined with Recon&apos;s PH Activator at the correct ratio, it produces fresh hypochlorous acid (HOCl) — a highly effective pre-dip and cleaning solution you make right on your farm.
+          </p>
+          <p className="mt-3 text-[15px] leading-relaxed text-[#334155]">
             No more waiting on trucks. No more volatile chemical prices. Just consistent, low-cost HOCl — always available, always fresh.
           </p>
         </div>

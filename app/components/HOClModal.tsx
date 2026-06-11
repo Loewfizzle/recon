@@ -56,6 +56,7 @@ function ModalContent({ onTalkToSpecialist }: { onTalkToSpecialist: () => void }
       </section>
 
       <button
+        type="button"
         onClick={onTalkToSpecialist}
         className="btn-primary w-full justify-center text-base py-3.5"
       >
@@ -79,6 +80,7 @@ export default function HOClModal() {
     <>
       <div className="mt-8 text-center">
         <button
+          type="button"
           onClick={() => setOpen(true)}
           className="btn-secondary px-8 py-3"
         >

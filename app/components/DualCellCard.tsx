@@ -6,7 +6,7 @@ import { Check, Zap } from 'lucide-react';
 import Modal from './Modal';
 
 const specs: [string, string][] = [
-  ['Concentration', '8,000 ± PPM Free Available Chlorine'],
+  ['Concentration', '8,000 PPM Free Available Chlorine'],
   ['Output', '55 gal every 10 hrs per cell'],
   ['Power Requirement', 'Dedicated 120V, 30 amp twist-lock'],
   ['Power Draw', '30 amps @ 30 volts DC per cell'],
@@ -69,11 +69,12 @@ function ModalContent({ onRequestQuote }: { onRequestQuote: () => void }) {
             <div className="text-xs text-[#64748b] mt-0.5">every 10 hours</div>
           </div>
           <div className="rounded-xl bg-slate-50 p-4">
-            <div className="text-[#64748b] text-xs tracking-wide uppercase mb-1">Before Refill</div>
-            <div className="font-semibold text-2xl text-[var(--color-primary)]">275 gal</div>
-            <div className="text-xs text-[#64748b] mt-0.5">5 batches unattended</div>
+            <div className="text-[#64748b] text-xs tracking-wide uppercase mb-1">275-Gal Tote</div>
+            <div className="font-semibold text-2xl text-[var(--color-primary)]">~50 hrs</div>
+            <div className="text-xs text-[#64748b] mt-0.5">to fill completely</div>
           </div>
         </div>
+        <p className="text-xs text-[#64748b] mt-2">Concentrate output — yields approximately 1,925 gal RTU per tote (6:1 dilution).</p>
       </section>
 
       {/* How It Works */}
@@ -221,7 +222,7 @@ export default function DualCellCard() {
 
         <p className="mt-3 text-[#475569] text-[15px] leading-relaxed">
           Nearly twice the speed of the single-cell model. Built for larger herds and operations
-          running pre-dip, parlor wash, sand treatment, and calf hutch cleaning — all from one machine.
+          running pre-dip, parlor wash, sand treatment, and calf stall cleaning — all from one machine.
         </p>
 
         <div className="mt-4 flex items-center gap-2.5 rounded-xl bg-[var(--color-primary)]/5 px-4 py-3">
@@ -239,15 +240,16 @@ export default function DualCellCard() {
 
         <div className="mt-auto pt-6 flex flex-wrap gap-3">
           <button
+            type="button"
             onClick={() => setOpen(true)}
-            className="btn-primary flex-1 sm:flex-none justify-center"
+            className="btn-secondary flex-1 sm:flex-none justify-center"
           >
             Learn More
           </button>
           <button
             type="button"
             onClick={() => document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-            className="btn-secondary flex-1 sm:flex-none justify-center"
+            className="btn-primary flex-1 sm:flex-none justify-center"
           >
             See Savings
           </button>
