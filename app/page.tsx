@@ -143,7 +143,7 @@ export default function ReconLanding() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {[
-            { icon: DollarSign, title: "Dramatic cost reduction", desc: "Produce pre-dip and parlor wash for a fraction of purchased chemical prices. Most dairies recover their investment in months." },
+            { icon: DollarSign, title: "Dramatic cost reduction", desc: "Produce pre-dip, general cleaner, parlor wash, calf stall cleaner, sand treatment for a fraction of purchased chemical prices. Most dairies recover their investment in months." },
             { icon: Clock, title: "Always fresh, always available", desc: "No delivery delays. No empty totes. Make exactly what you need, when you need it — 24/7." },
             { icon: Shield, title: "Proven & supported", desc: "Machines engineered for dairy environments. Full warranty, monthly service plan, and remote internet-based support from our Michigan team." },
             { icon: Users, title: "Built by dairy people", desc: "We've been serving producers since 2008. We understand parlor workflows, mastitis prevention, and the real economics of your operation." },
