@@ -214,7 +214,7 @@ export default function ReconLanding() {
             </div>
             <textarea name="notes" placeholder="Notes (e.g. current pre-dip cost, questions)" className="mt-3 w-full bg-white text-[#0f172a] rounded-lg px-3 py-2 text-sm h-16 resize-y" />
             <button type="submit" className="mt-3 w-full btn-primary text-base py-2.5">Send request</button>
-            <div className="mt-2 text-[11px] text-white/60 text-center">We&apos;ll follow up within 1 business day. No obligation.</div>
+            <div className="mt-2 text-[11px] text-white/60 text-center">We&apos;ll follow up within 3 business days. No obligation.</div>
           </form>
 
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
