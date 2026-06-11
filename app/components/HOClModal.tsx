@@ -78,7 +78,7 @@ export default function HOClModal() {
 
   return (
     <>
-      <div className="mt-8 text-center">
+      <div className="mt-5 text-center">
         <button
           type="button"
           onClick={() => setOpen(true)}
