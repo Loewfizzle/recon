@@ -31,14 +31,6 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-24 flex items-center justify-between">
         {/* Logo - full lockup */}
         <a href="#top" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="flex items-center gap-2.5 group" aria-label="Recon Technologies home">
-          {/* American flag — mobile only */}
-          <svg viewBox="0 0 190 100" className="md:hidden w-12 h-[25px] rounded-sm shadow-sm shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-            <rect width="190" height="100" fill="#B22234" />
-            {[1,3,5,7,9,11].map(i => <rect key={i} y={i * 100/13} width="190" height={100/13} fill="#FFFFFF" />)}
-            <rect width="76" height={700/13} fill="#3C3B6E" />
-            {[1,3,5,7,9].flatMap(row => [1,3,5,7,9,11].map(col => <circle key={`r${row}c${col}`} cx={76/12*col} cy={(700/13)/10*row} r={2} fill="#FFFFFF" />))}
-            {[2,4,6,8].flatMap(row => [2,4,6,8,10].map(col => <circle key={`r${row}c${col}`} cx={76/12*col} cy={(700/13)/10*row} r={2} fill="#FFFFFF" />))}
-          </svg>
           <Image
             src="/logo.png"
             alt="Recon Technologies"
@@ -47,6 +39,14 @@ export default function Header() {
             className="h-14 w-auto md:h-16"
             priority
           />
+          {/* American flag — mobile only */}
+          <svg viewBox="0 0 190 100" className="md:hidden w-12 h-[25px] rounded-sm shadow-sm shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <rect width="190" height="100" fill="#B22234" />
+            {[1,3,5,7,9,11].map(i => <rect key={i} y={i * 100/13} width="190" height={100/13} fill="#FFFFFF" />)}
+            <rect width="76" height={700/13} fill="#3C3B6E" />
+            {[1,3,5,7,9].flatMap(row => [1,3,5,7,9,11].map(col => <circle key={`r${row}c${col}`} cx={76/12*col} cy={(700/13)/10*row} r={2} fill="#FFFFFF" />))}
+            {[2,4,6,8].flatMap(row => [2,4,6,8,10].map(col => <circle key={`r${row}c${col}`} cx={76/12*col} cy={(700/13)/10*row} r={2} fill="#FFFFFF" />))}
+          </svg>
         </a>
 
         {/* Desktop Navigation */}
