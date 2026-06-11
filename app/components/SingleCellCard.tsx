@@ -24,8 +24,9 @@ function ModalContent({ onRequestQuote }: { onRequestQuote: () => void }) {
       {/* Intro */}
       <div className="rounded-xl bg-[var(--color-primary)]/5 border border-[var(--color-primary)]/10 p-4">
         <p className="text-[#334155] leading-relaxed">
-          The C-100 is a fully automated, single-cell system that produces fresh sodium hypochlorite
-          (ECActiv Concentrate) right on your farm. The ideal entry point for most dairies — reliable,
+          The C-100 is a fully automated, single-cell system that produces sodium hypochlorite concentrate
+          right on your farm. Combined with Recon&apos;s PH Activator at the correct ratio, it delivers
+          fresh hypochlorous acid (HOCl) — your ready-to-use pre-dip. The ideal entry point for most dairies — reliable,
           efficient, and simple to operate.
         </p>
       </div>

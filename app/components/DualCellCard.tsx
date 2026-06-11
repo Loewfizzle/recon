@@ -34,8 +34,9 @@ function ModalContent({ onRequestQuote }: { onRequestQuote: () => void }) {
       {/* Intro */}
       <div className="rounded-xl bg-[var(--color-primary)]/5 border border-[var(--color-primary)]/10 p-4">
         <p className="text-[#334155] leading-relaxed">
-          The C-200 is a fully automated, dual-cell system that produces high-quality sodium hypochlorite
-          (ECActiv Concentrate) right on your farm. Just load the salt brine and press start.
+          The C-200 is a fully automated, dual-cell system that produces sodium hypochlorite concentrate
+          right on your farm. Combined with Recon&apos;s PH Activator at the correct ratio, it delivers
+          fresh hypochlorous acid (HOCl) — your ready-to-use pre-dip. Just load the salt brine and press start.
         </p>
       </div>
 
@@ -83,7 +84,7 @@ function ModalContent({ onRequestQuote }: { onRequestQuote: () => void }) {
             'Load salt brine into the tank.',
             'Press "Start".',
             'The machine automatically produces 8,000 PPM sodium hypochlorite concentrate.',
-            'Use the concentrate for pre-dip, water chlorination, sand treatment, calf stall cleaning, general cleaning, and more.',
+            'Combine the sodium hypochlorite concentrate with Recon\'s PH Activator to produce fresh HOCl. Use for pre-dip, water chlorination, sand treatment, calf stall cleaning, general cleaning, and more.',
           ].map((step, i) => (
             <li key={i} className="flex gap-3">
               <span className="w-6 h-6 rounded-full bg-[var(--color-primary)] text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
