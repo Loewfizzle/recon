@@ -22,10 +22,12 @@ function loadSaved() {
 }
 
 export default function SavingsCalculator() {
-  const [herdSize,  setHerdSize]  = useState<number>(() => loadSaved().herd      || 620);
-  const [method,    setMethod]    = useState<AppMethod>(() => loadSaved().method  || 'foamers');
-  const [rtuPrice,  setRtuPrice]  = useState<number>(() => loadSaved().rtuPrice  || 2.50);
-  const [milkings,  setMilkings]  = useState<2 | 3>(() => loadSaved().milkings  || 2);
+  const [herdSize,    setHerdSize]    = useState<number>(() => loadSaved().herd      || 620);
+  const [herdRaw,     setHerdRaw]     = useState<string>(() => String(loadSaved().herd || 620));
+  const [method,      setMethod]      = useState<AppMethod>(() => loadSaved().method  || 'foamers');
+  const [rtuPrice,    setRtuPrice]    = useState<number>(() => loadSaved().rtuPrice  || 2.50);
+  const [rtuRaw,      setRtuRaw]      = useState<string>(() => String(loadSaved().rtuPrice || 2.50));
+  const [milkings,    setMilkings]    = useState<2 | 3>(() => loadSaved().milkings  || 2);
 
   useEffect(() => {
     localStorage.setItem('reconCalculator', JSON.stringify({
@@ -55,23 +57,50 @@ export default function SavingsCalculator() {
         {/* Controls */}
         <div className="lg:col-span-3 space-y-7">
 
-          {/* Herd Size */}
-          <div>
-            <label className="block font-semibold text-sm tracking-wide text-[#334155] mb-2">
-              MILKING HERD SIZE
-            </label>
-            <input
-              type="number"
-              value={herdSize}
-              min={50}
-              max={5000}
-              onChange={(e) => {
-                const val = parseInt(e.target.value, 10);
-                if (!isNaN(val)) setHerdSize(Math.min(5000, Math.max(50, val)));
-              }}
-              className="input-number max-w-[160px]"
-              aria-label="Milking herd size"
-            />
+          {/* Herd Size + Milkings Per Day */}
+          <div className="flex flex-wrap gap-6">
+            <div>
+              <label className="block font-semibold text-sm tracking-wide text-[#334155] mb-2">
+                MILKING HERD SIZE
+              </label>
+              <input
+                type="number"
+                value={herdRaw}
+                min={50}
+                max={5000}
+                onChange={(e) => setHerdRaw(e.target.value)}
+                onBlur={() => {
+                  const val = parseInt(herdRaw, 10);
+                  const clamped = isNaN(val) ? herdSize : Math.min(5000, Math.max(50, val));
+                  setHerdSize(clamped);
+                  setHerdRaw(String(clamped));
+                }}
+                className="input-number max-w-[160px]"
+                aria-label="Milking herd size"
+              />
+            </div>
+
+            <div>
+              <label className="block font-semibold text-sm tracking-wide text-[#334155] mb-2">
+                MILKINGS PER DAY
+              </label>
+              <div className="inline-flex rounded-xl border border-slate-200 overflow-hidden">
+                {([2, 3] as const).map((n) => (
+                  <button
+                    key={n}
+                    type="button"
+                    onClick={() => setMilkings(n)}
+                    className={`px-6 py-2.5 text-sm font-semibold transition ${
+                      milkings === n
+                        ? 'bg-[var(--color-primary)] text-white'
+                        : 'bg-white text-[#475569] hover:bg-slate-50'
+                    }`}
+                  >
+                    {n}×/day
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Application Method */}
@@ -92,7 +121,7 @@ export default function SavingsCalculator() {
                   }`}
                 >
                   <div className="font-semibold">{label}</div>
-                  <div className="text-xs text-[#64748b] mt-0.5">{ml} ml/teat</div>
+                  <div className="text-xs text-[#64748b] mt-0.5">{ml} ml/cow</div>
                 </button>
               ))}
             </div>
@@ -107,12 +136,15 @@ export default function SavingsCalculator() {
               <div className="absolute left-3.5 top-2.5 text-[#64748b] font-medium">$</div>
               <input
                 type="number"
-                value={rtuPrice}
+                value={rtuRaw}
                 step="0.01"
                 min="0.01"
-                onChange={(e) => {
-                  const val = parseFloat(e.target.value);
-                  if (!isNaN(val) && val > 0) setRtuPrice(val);
+                onChange={(e) => setRtuRaw(e.target.value)}
+                onBlur={() => {
+                  const val = parseFloat(rtuRaw);
+                  const clean = isNaN(val) || val <= 0 ? rtuPrice : val;
+                  setRtuPrice(clean);
+                  setRtuRaw(String(clean));
                 }}
                 className="input-number pl-7 w-full"
                 aria-label="Current pre-dip price per gallon RTU"
@@ -120,28 +152,6 @@ export default function SavingsCalculator() {
             </div>
           </div>
 
-          {/* Milkings Per Day */}
-          <div>
-            <label className="block font-semibold text-sm tracking-wide text-[#334155] mb-2">
-              MILKINGS PER DAY
-            </label>
-            <div className="inline-flex rounded-xl border border-slate-200 overflow-hidden">
-              {([2, 3] as const).map((n) => (
-                <button
-                  key={n}
-                  type="button"
-                  onClick={() => setMilkings(n)}
-                  className={`px-6 py-2.5 text-sm font-semibold transition ${
-                    milkings === n
-                      ? 'bg-[var(--color-primary)] text-white'
-                      : 'bg-white text-[#475569] hover:bg-slate-50'
-                  }`}
-                >
-                  {n}×/day
-                </button>
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* Results — placeholder until calculation logic is wired */}
@@ -220,7 +230,7 @@ export default function SavingsCalculator() {
       </div>
 
       <div className="mt-6 pt-4 border-t text-[11px] text-[#94a3b8] leading-snug">
-        Application volume assumptions: Robot 15 ml · Foamers 6 ml · Manual Spray 17 ml · Dip Cups 12 ml per teat per milking. RTU = ready-to-use dilution.
+        Application volume assumptions: Robot 15 ml · Foamers 6 ml · Manual Spray 17 ml · Dip Cups 12 ml per cow per milking. RTU = ready-to-use dilution.
       </div>
     </div>
   );

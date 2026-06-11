@@ -60,7 +60,7 @@ function ModalContent({ onRequestQuote }: { onRequestQuote: () => void }) {
           </div>
           <div className="rounded-xl bg-slate-50 p-4">
             <div className="text-[#64748b] text-xs tracking-wide uppercase mb-1">275-Gal Tote</div>
-            <div className="font-semibold text-2xl text-[var(--color-primary)]">~103 hrs</div>
+            <div className="font-semibold text-2xl text-[var(--color-primary)]">~100 hrs</div>
             <div className="text-xs text-[#64748b] mt-0.5">to fill completely</div>
           </div>
         </div>
@@ -119,7 +119,7 @@ export default function SingleCellCard() {
           </p>
 
           <div className="mt-4 flex items-baseline gap-2">
-            <span className="text-4xl font-semibold tabular-nums text-[var(--color-primary)]">103</span>
+            <span className="text-4xl font-semibold tabular-nums text-[var(--color-primary)]">~100</span>
             <span className="text-[#475569] text-[15px]">hours to fill a 275-gallon tote</span>
           </div>
 

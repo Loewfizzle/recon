@@ -229,6 +229,11 @@ export default function DualCellCard() {
           </span>
         </div>
 
+        <div className="mt-4 flex items-baseline gap-2">
+          <span className="text-4xl font-semibold tabular-nums text-[var(--color-primary)]">~50</span>
+          <span className="text-[#475569] text-[15px]">hours to fill a 275-gallon tote</span>
+        </div>
+
         <div className="mt-auto pt-6 flex flex-wrap gap-3">
           <button
             onClick={() => setOpen(true)}
