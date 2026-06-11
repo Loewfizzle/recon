@@ -59,7 +59,7 @@ export default function ReconLanding() {
       </section>
 
       {/* OUR ECA MACHINES */}
-      <section id="machines" className="bg-white border-y py-12 sm:py-16">
+      <section id="machines" className="bg-white border-y py-12 sm:py-16 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-8">
             <div>
@@ -82,7 +82,7 @@ export default function ReconLanding() {
       </section>
 
       {/* HOCl vs IODINE */}
-      <section id="comparison" className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+      <section id="comparison" className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 scroll-mt-24">
         <div className="mb-8">
           <div className="text-[#0f766e] uppercase text-sm tracking-[1.5px] font-semibold">THE CLEAR CHOICE FOR PRE-DIP</div>
           <h2 className="section-title mt-2">HOCl vs Traditional Iodine</h2>
@@ -122,7 +122,7 @@ export default function ReconLanding() {
       </section>
 
       {/* SAVINGS CALCULATOR */}
-      <section id="calculator" className="bg-white border-y py-12 sm:py-16">
+      <section id="calculator" className="bg-white border-y py-12 sm:py-16 scroll-mt-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="mb-8 text-center">
             <div className="inline text-[#0f766e] text-sm font-semibold tracking-widest">REAL NUMBERS FOR REAL HERDS</div>
@@ -135,7 +135,7 @@ export default function ReconLanding() {
       </section>
 
       {/* WHY FARMERS CHOOSE RECON */}
-      <section id="why" className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+      <section id="why" className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 scroll-mt-24">
         <div className="mb-9">
           <h2 className="section-title">Why farmers choose Recon</h2>
           <p className="mt-2 text-[#475569]">Over 300,000 cows across 16 states rely on Recon ECALogical systems every day.</p>
@@ -160,7 +160,7 @@ export default function ReconLanding() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section id="how" className="bg-white border-y py-12 sm:py-16">
+      <section id="how" className="bg-white border-y py-12 sm:py-16 scroll-mt-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="mb-10">
             <div className="text-[#0f766e] text-sm font-semibold tracking-widest">SIMPLE. AUTOMATED. RELIABLE.</div>
@@ -189,7 +189,7 @@ export default function ReconLanding() {
       </section>
 
       {/* FINAL CTA + CONTACT */}
-      <section id="contact" className="py-14 sm:py-16 border-b bg-[#14532d] text-white">
+      <section id="contact" className="py-14 sm:py-16 border-b bg-[#14532d] text-white scroll-mt-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <h2 className="text-3xl sm:text-4xl font-semibold tracking-tighter">Ready to cut your chemical costs and never worry about pre-dip supply again?</h2>
           <p className="mt-4 text-lg text-white/80 max-w-prose mx-auto">Talk to a Recon specialist. We&apos;ll visit your farm, analyze your current usage, and show you the exact numbers for your herd.</p>

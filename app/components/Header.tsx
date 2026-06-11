@@ -18,17 +18,9 @@ export default function Header() {
   const closeMenu = () => setIsOpen(false);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
     closeMenu();
-    // Smooth scroll is handled by CSS, but ensure close on mobile
-    const target = document.querySelector(href);
-    if (target) {
-      const offset = 70; // account for sticky header
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementPosition = target.getBoundingClientRect().top;
-      const offsetPosition = elementPosition - bodyRect - offset;
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-      e.preventDefault();
-    }
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
