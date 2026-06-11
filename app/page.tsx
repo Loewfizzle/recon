@@ -1,6 +1,6 @@
 ﻿'use client';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SavingsCalculator from './components/SavingsCalculator';
@@ -13,10 +13,6 @@ const scrollTo = (id: string) =>
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
 export default function ReconLanding() {
-  useEffect(() => {
-    history.scrollRestoration = 'manual';
-  }, []);
-
   return (
     <div id="top" className="min-h-screen flex flex-col bg-[#f8fafc] text-[#0f172a]">
       <Header />
