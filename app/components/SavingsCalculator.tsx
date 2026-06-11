@@ -3,25 +3,20 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Calculator, TrendingUp, DollarSign } from 'lucide-react';
 
-export default function SavingsCalculator() {
-  const [herdSize, setHerdSize] = useState(620);
-  const [currentMonthly, setCurrentMonthly] = useState(1850);
-  const [variablePerCow, setVariablePerCow] = useState(0.92);
-  const [serviceFee, setServiceFee] = useState(189);
+function loadSaved() {
+  if (typeof window === 'undefined') return {};
+  try {
+    return JSON.parse(localStorage.getItem('reconCalculator') || '{}');
+  } catch {
+    return {};
+  }
+}
 
-  // Load from localStorage on mount
-  useEffect(() => {
-    const saved = localStorage.getItem('reconCalculator');
-    if (saved) {
-      try {
-        const { herd, spend, vpc, fee } = JSON.parse(saved);
-        if (herd) setHerdSize(herd);
-        if (spend) setCurrentMonthly(spend);
-        if (vpc) setVariablePerCow(vpc);
-        if (fee) setServiceFee(fee);
-      } catch {}
-    }
-  }, []);
+export default function SavingsCalculator() {
+  const [herdSize, setHerdSize] = useState<number>(() => loadSaved().herd || 620);
+  const [currentMonthly, setCurrentMonthly] = useState<number>(() => loadSaved().spend || 1850);
+  const [variablePerCow, setVariablePerCow] = useState<number>(() => loadSaved().vpc || 0.92);
+  const [serviceFee, setServiceFee] = useState<number>(() => loadSaved().fee || 189);
 
   // Save to localStorage when values change
   useEffect(() => {

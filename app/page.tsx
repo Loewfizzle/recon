@@ -251,7 +251,7 @@ export default function ReconLanding() {
       <section id="contact" className="py-14 sm:py-16 border-b bg-[#14532d] text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <h2 className="text-3xl sm:text-4xl font-semibold tracking-tighter">Ready to cut your chemical costs and never worry about pre-dip supply again?</h2>
-          <p className="mt-4 text-lg text-white/80 max-w-prose mx-auto">Talk to a Recon specialist. We'll visit your farm, analyze your current usage, and show you the exact numbers for your herd.</p>
+          <p className="mt-4 text-lg text-white/80 max-w-prose mx-auto">Talk to a Recon specialist. We&apos;ll visit your farm, analyze your current usage, and show you the exact numbers for your herd.</p>
 
           {/* Lead capture form */}
           <form
@@ -273,7 +273,7 @@ export default function ReconLanding() {
             </div>
             <textarea name="notes" placeholder="Notes (e.g. current pre-dip cost, questions)" className="mt-3 w-full bg-white text-[#0f172a] rounded-lg px-3 py-2 text-sm h-16 resize-y" />
             <button type="submit" className="mt-3 w-full btn-primary text-base py-2.5">Send request</button>
-            <div className="mt-2 text-[11px] text-white/60 text-center">We'll follow up within 1 business day. No obligation.</div>
+            <div className="mt-2 text-[11px] text-white/60 text-center">We&apos;ll follow up within 1 business day. No obligation.</div>
           </form>
 
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
