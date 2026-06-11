@@ -59,7 +59,7 @@ export default function Header() {
         <div className="hidden md:flex items-center gap-3">
           <a
             href="tel:8003384950"
-            className="flex items-center gap-2 text-sm font-semibold text-[#14532d] hover:text-[#0f3d22] px-3 py-1.5 rounded-full hover:bg-white transition"
+            className="flex items-center gap-2 text-sm font-semibold text-[#14532d] hover:text-[#0f3d22] px-3 py-1.5 rounded-full hover:bg-white transition whitespace-nowrap"
           >
             <Phone className="w-4 h-4" />
             800-338-4950
@@ -67,7 +67,7 @@ export default function Header() {
           <button
             type="button"
             onClick={() => document.querySelector('#calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-            className="btn-primary text-sm px-5 py-2 h-10"
+            className="btn-primary text-[13px] px-4 py-2 h-10"
           >
             Calculate Savings
           </button>

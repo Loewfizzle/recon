@@ -120,7 +120,7 @@ export default function ReconLanding() {
 
         {/* Desktop + mobile friendly comparison */}
         <div className="card overflow-hidden">
-          <div className="hidden sm:grid grid-cols-3 bg-slate-50 px-5 py-3 text-sm font-semibold text-[#334155] border-b">
+          <div className="hidden sm:grid gap-3 bg-slate-50 px-4 py-3.5 text-sm font-semibold text-[#334155] border-b" style={{ gridTemplateColumns: '1.1fr 1fr 1fr' }}>
             <div>Factor</div>
             <div>Traditional Iodine</div>
             <div className="text-[var(--color-brand-blue)]">Recon HOCl (ECActiv)</div>
