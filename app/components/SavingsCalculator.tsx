@@ -269,8 +269,14 @@ export default function SavingsCalculator() {
         </div>
       </div>
 
-      <div className="mt-6 pt-4 border-t text-[11px] text-[#94a3b8] leading-snug">
-        Application volume assumptions: Robot 15 ml · Foamers 6 ml · Manual Spray 17 ml · Dip Cups 12 ml per cow per milking. Recon cost includes PH activator, sodium hypochlorite, and surfactant. Foamers cost is higher due to increased surfactant concentration required. RTU = ready-to-use.
+      <div className="mt-6 pt-4 border-t text-[11px] text-[#94a3b8] leading-snug space-y-1.5">
+        <div>
+          <span className="font-semibold text-[#64748b]">Application volumes (per cow per milking):</span>
+          {' '}Robot 15 ml · Foamers 6 ml · Manual Spray 17 ml · Dip Cups 12 ml
+        </div>
+        <div>
+          Recon cost includes PH activator, sodium hypochlorite, and surfactant. Foamers cost is higher due to increased surfactant concentration required. RTU = ready-to-use.
+        </div>
       </div>
     </div>
   );
