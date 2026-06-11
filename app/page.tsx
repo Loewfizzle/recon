@@ -4,9 +4,10 @@ import React from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SavingsCalculator from './components/SavingsCalculator';
-import { Check, X, ArrowRight, Users, Clock, Shield, DollarSign, Leaf } from 'lucide-react';
+import { Check, X, ArrowRight, Users, Clock, Shield, DollarSign, Leaf, Zap, Heart, FlaskConical } from 'lucide-react';
 import DualCellCard from './components/DualCellCard';
 import SingleCellCard from './components/SingleCellCard';
+import HOClModal from './components/HOClModal';
 
 export default function ReconLanding() {
 
@@ -79,6 +80,32 @@ export default function ReconLanding() {
 
           <p className="text-center text-sm text-[#64748b] mt-7">Both machines are fully automated, remotely supported, and backed by our monthly service program. Pricing available on request.</p>
         </div>
+      </section>
+
+      {/* WHAT IS HOCl */}
+      <section id="hocl" className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 scroll-mt-24">
+        <div className="mb-9">
+          <h2 className="section-title">What is Hypochlorous Acid — and why does it work so well?</h2>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {[
+            { icon: Zap,          title: 'Powerful Pathogen Kill',       desc: 'HOCl is one of the most effective naturally-occurring antimicrobials known. It destroys mastitis-causing pathogens including Staph aureus, Strep, and coliform bacteria at the teat end, reducing new infection risk at every milking.' },
+            { icon: Heart,        title: 'Gentle on Teat Skin',          desc: 'Unlike iodine-based dips that can dry and crack teat ends over time, HOCl is pH-neutral and gentle on tissue. Healthy teat ends mean better milk-out and a stronger natural barrier against infection.' },
+            { icon: Clock,        title: 'Fresh Every Time',             desc: 'HOCl degrades quickly when stored — purchased pre-dip loses efficacy over time in the jug. Recon\'s system produces it on-demand so every milking uses fresh, fully active solution at peak effectiveness.' },
+            { icon: FlaskConical, title: 'How We Make It On Your Farm',  desc: 'Your ECALogical machine produces sodium hypochlorite from salt, water, and electricity. Combined on-site with Recon\'s PH Activator at the correct ratio, it converts to fresh hypochlorous acid — ready to use in your parlor.' },
+          ].map((card, i) => (
+            <div key={i} className="card p-6">
+              <div className="w-10 h-10 rounded-2xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center mb-4">
+                <card.icon className="w-5 h-5" />
+              </div>
+              <div className="font-semibold text-lg tracking-tight mb-2">{card.title}</div>
+              <p className="text-[14.5px] text-[#475569] leading-relaxed">{card.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <HOClModal />
       </section>
 
       {/* HOCl vs IODINE */}

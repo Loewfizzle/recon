@@ -6,6 +6,7 @@ import Image from 'next/image';
 
 const navLinks = [
   { href: '#machines', label: 'Machines' },
+  { href: '#hocl', label: 'HOCl Science' },
   { href: '#comparison', label: 'HOCl vs Iodine' },
   { href: '#calculator', label: 'Savings Calculator' },
   { href: '#why', label: 'Why Recon' },
