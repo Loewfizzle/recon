@@ -84,17 +84,7 @@ export default function ReconLanding() {
             <DualCellCard />
           </div>
 
-          <div className="mt-7 rounded-2xl bg-[var(--color-primary)]/5 border border-[var(--color-primary)]/10 px-5 py-4 text-center text-sm text-[#334155]">
-            Not sure which machine fits your herd?{' '}
-            <button
-              type="button"
-              onClick={() => scrollTo('calculator')}
-              className="font-semibold text-[var(--color-primary)] underline underline-offset-2 hover:opacity-80 transition"
-            >
-              The savings calculator below can help.
-            </button>
-          </div>
-          <p className="text-center text-sm text-[#64748b] mt-4">Both machines are fully automated, remotely supported, and backed by our monthly service program. Pricing available on request.</p>
+          <p className="text-center text-sm text-[#64748b] mt-7">Both machines are fully automated, remotely supported, and backed by our monthly service program. Pricing available on request.</p>
         </div>
       </section>
 
