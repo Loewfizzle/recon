@@ -108,7 +108,7 @@ export default function SingleCellCard() {
             alt="C-100 Single Cell ECALogical machine"
             width={800}
             height={500}
-            className="w-full h-72 sm:h-80 object-cover"
+            className="w-full h-96 sm:h-[28rem] object-cover"
           />
         </div>
 
