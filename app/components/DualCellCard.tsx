@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { Check, Zap } from 'lucide-react';
 import Modal from './Modal';
 
@@ -17,6 +18,18 @@ const specs: [string, string][] = [
 function ModalContent({ onRequestQuote }: { onRequestQuote: () => void }) {
   return (
     <div className="space-y-7 text-[15px]">
+
+      {/* Hero image */}
+      <div className="rounded-xl overflow-hidden">
+        <Image
+          src="/dual.png"
+          alt="C-200 Dual Cell ECALogical machine"
+          width={800}
+          height={500}
+          className="w-full h-48 sm:h-64 object-cover"
+          priority
+        />
+      </div>
 
       {/* Intro */}
       <div className="rounded-xl bg-[var(--color-primary)]/5 border border-[var(--color-primary)]/10 p-4">
@@ -184,7 +197,19 @@ export default function DualCellCard() {
 
   return (
     <>
-      <div className="card p-6 sm:p-7 flex flex-col ring-1 ring-[var(--color-primary)]/10">
+      <div className="card flex flex-col overflow-hidden ring-1 ring-[var(--color-primary)]/10">
+        {/* Machine photo */}
+        <div className="w-full">
+          <Image
+            src="/dual.png"
+            alt="C-200 Dual Cell ECALogical machine"
+            width={800}
+            height={500}
+            className="w-full h-44 sm:h-52 object-cover"
+          />
+        </div>
+
+        <div className="p-6 sm:p-7 flex flex-col flex-1">
         <div className="flex items-center gap-2">
           <div className="uppercase text-xs tracking-[1px] font-semibold text-[#0f766e]">DUAL CELL • C200</div>
           <div className="text-[10px] px-2 py-px rounded bg-[#14532d] text-white font-medium">FASTER</div>
@@ -214,6 +239,7 @@ export default function DualCellCard() {
           <a href="#calculator" className="btn-secondary flex-1 sm:flex-none justify-center">
             See Savings
           </a>
+        </div>
         </div>
       </div>
 

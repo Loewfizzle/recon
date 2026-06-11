@@ -1,53 +1,14 @@
 ﻿'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Modal from './components/Modal';
 import SavingsCalculator from './components/SavingsCalculator';
 import { Check, X, ArrowRight, Users, Clock, Shield, DollarSign, Leaf } from 'lucide-react';
 import DualCellCard from './components/DualCellCard';
-
-// Machine detail content for modals
-const singleCellDetails = (
-  <div className="space-y-5">
-    <div>
-      <div className="uppercase tracking-[1px] text-xs font-semibold text-[var(--color-accent)]">C100 / SINGLE CELL</div>
-      <div className="text-2xl font-semibold tracking-tight mt-1">Reliable capacity for most dairies</div>
-    </div>
-
-    <div className="grid grid-cols-2 gap-4 text-sm">
-      <div className="rounded-xl bg-slate-50 p-4">
-        <div className="text-[#64748b] text-xs tracking-wide">275-GALLON TOTE</div>
-        <div className="font-semibold text-xl mt-1 text-[var(--color-brand-blue)]">~103 hours</div>
-      </div>
-      <div className="rounded-xl bg-slate-50 p-4">
-        <div className="text-[#64748b] text-xs tracking-wide">CONCENTRATE OUTPUT</div>
-        <div className="font-semibold text-xl mt-1">55 gal every ~18 hrs</div>
-      </div>
-    </div>
-
-    <div>
-      <div className="font-semibold mb-2">Key Features</div>
-      <ul className="space-y-1.5 text-[15px]">
-        <li className="flex gap-2"><Check className="w-4 h-4 mt-1 text-[#15803d] shrink-0" /> Fully automated PLC control</li>
-        <li className="flex gap-2"><Check className="w-4 h-4 mt-1 text-[#15803d] shrink-0" /> Made in the USA (Grand Rapids, MI)</li>
-        <li className="flex gap-2"><Check className="w-4 h-4 mt-1 text-[#15803d] shrink-0" /> Remote internet monitoring &amp; support</li>
-        <li className="flex gap-2"><Check className="w-4 h-4 mt-1 text-[#15803d] shrink-0" /> Monthly service plan included</li>
-        <li className="flex gap-2"><Check className="w-4 h-4 mt-1 text-[#15803d] shrink-0" /> Ideal for herds up to ~900 cows</li>
-      </ul>
-    </div>
-
-    <div className="pt-2 text-sm border-t">
-      Perfect entry point for farms looking to eliminate purchased pre-dip and premise chemicals. Excellent ROI even on moderate-sized operations.
-    </div>
-  </div>
-);
+import SingleCellCard from './components/SingleCellCard';
 
 export default function ReconLanding() {
-  const [modalOpen, setModalOpen] = useState<'single' | null>(null);
-  const openModal = () => setModalOpen('single');
-  const closeModal = () => setModalOpen(null);
 
   return (
     <div id="top" className="min-h-screen flex flex-col bg-[#f8fafc] text-[#0f172a]">
@@ -110,27 +71,7 @@ export default function ReconLanding() {
 
           <div className="grid md:grid-cols-2 gap-6">
             {/* Single Cell Card */}
-            <div className="card p-6 sm:p-7 flex flex-col">
-              <div className="uppercase text-xs tracking-[1px] font-semibold text-[#0f766e]">SINGLE CELL • C100</div>
-              <h3 className="text-2xl font-semibold tracking-tight mt-2">Single Cell Machine</h3>
-              <div className="mt-5 space-y-3 text-[15px]">
-                <div className="flex items-baseline gap-2">
-                  <span className="text-4xl font-semibold tabular-nums text-[var(--color-primary)]">103</span>
-                  <span className="text-[#475569]">hours to fill a 275-gallon tote</span>
-                </div>
-                <div className="text-[#475569]">Best for mid-size herds or farms primarily focused on pre-dip.</div>
-              </div>
-
-              <div className="mt-auto pt-6">
-                <div className="text-sm text-[#64748b] mb-3">Price positioning: Strong value, rapid payback for most operations.</div>
-                <div className="flex flex-wrap gap-3">
-                  <button onClick={openModal} className="btn-secondary flex-1 sm:flex-none justify-center">
-                    Learn More
-                  </button>
-                  <a href="#calculator" className="btn-primary flex-1 sm:flex-none justify-center">See Savings</a>
-                </div>
-              </div>
-            </div>
+            <SingleCellCard />
 
             {/* Dual Cell Card */}
             <DualCellCard />
@@ -293,14 +234,6 @@ export default function ReconLanding() {
 
       <Footer />
 
-      {/* Modals */}
-      <Modal
-        isOpen={modalOpen === 'single'}
-        onClose={closeModal}
-        title="Single Cell Machine (C100)"
-      >
-        {singleCellDetails}
-      </Modal>
     </div>
   );
 }
