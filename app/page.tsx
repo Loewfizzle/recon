@@ -52,12 +52,10 @@ export default function ReconLanding() {
       {/* OUR ECA MACHINES */}
       <section id="machines" className="bg-white border-y py-12 sm:py-16 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-8">
-            <div>
-              <div className="text-[#0f766e] text-sm font-semibold tracking-widest">ECALOGICAL GENERATING SYSTEMS</div>
-              <h2 className="section-title mt-1">Two machines. Both produce the same powerful HOCl solution.</h2>
-            </div>
-            <p className="text-[#475569] max-w-md text-[15px]">Choose the output speed that matches your herd and parlor demands.</p>
+          <div className="mb-8 max-w-3xl">
+            <div className="text-[#0f766e] text-sm font-semibold tracking-widest">ECALOGICAL GENERATING SYSTEMS</div>
+            <h2 className="section-title mt-1">Two machines. Both produce the same powerful HOCl solution.</h2>
+            <p className="mt-3 text-[#475569] text-[15px]">Choose the output speed that matches your herd and parlor demands.</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
