@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React from 'react';
 import Header from './components/Header';
@@ -46,18 +46,6 @@ export default function ReconLanding() {
             <div>Serving 16+ states</div>
             <div>300,000+ cows protected</div>
           </div>
-        </div>
-      </section>
-
-      {/* WHO WE ARE */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-        <div className="max-w-3xl">
-          <div className="uppercase tracking-[2px] text-xs font-semibold text-[#0f766e]">SINCE 2008 • GRAND RAPIDS, MICHIGAN</div>
-          <h2 className="section-title mt-3">We build the machines that let dairy farmers take control of their chemistry.</h2>
-          <p className="mt-4 text-[15.5px] leading-relaxed text-[#334155]">
-            Recon Technologies manufactures ECALogical on-site generators that produce sodium hypochlorite from salt, water, and electricity. Combined with Recon&apos;s PH Activator at the correct ratio, it produces fresh hypochlorous acid (HOCl) — a highly effective pre-dip and cleaning solution you make right on your farm.
-            No more waiting on trucks. No more volatile chemical prices. Just consistent, low-cost HOCl — always available, always fresh.
-          </p>
         </div>
       </section>
 
@@ -152,16 +140,32 @@ export default function ReconLanding() {
         <p className="text-xs text-center mt-3 text-[#64748b]">Data based on field experience and customer reports across hundreds of dairies.</p>
       </section>
 
-      {/* SAVINGS CALCULATOR */}
-      <section id="calculator" className="bg-white border-y py-12 sm:py-16 scroll-mt-24">
+      {/* HOW IT WORKS */}
+      <section id="how" className="bg-white border-y py-12 sm:py-16 scroll-mt-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="mb-8 text-center">
-            <div className="inline text-[#0f766e] text-sm font-semibold tracking-widest">REAL NUMBERS FOR REAL HERDS</div>
-            <h2 className="section-title mt-2">Savings Calculator</h2>
-            <p className="mt-3 text-[#475569]">Most farms see 65–85% reduction in pre-dip chemical costs. See what it means for yours.</p>
+          <div className="mb-10">
+            <div className="text-[#0f766e] text-sm font-semibold tracking-widest">SIMPLE. AUTOMATED. RELIABLE.</div>
+            <h2 className="section-title mt-1">How it works</h2>
           </div>
 
-          <SavingsCalculator />
+          <div className="grid md:grid-cols-4 gap-6">
+            {[
+              { num: '1', title: 'We install the machine', desc: 'Our technicians deliver and set up your ECALogical generator with proper water softening and electrical connections.' },
+              { num: '2', title: 'Add brine additive', desc: 'Simply load the food-grade salt-based additive into the machine. One container lasts days or weeks depending on usage.' },
+              { num: '3', title: 'Machine generates sodium hypochlorite', desc: 'Fully automated. The system produces concentrated sodium hypochlorite on a continuous schedule with zero daily intervention.' },
+              { num: '4', title: 'Blend with PH Activator & use', desc: 'Combine the sodium hypochlorite concentrate with Recon\'s PH Activator at the correct ratio to produce fresh HOCl pre-dip. Use for pre-dip, post-dip, premise wash, calf hutches, or drop hoses.' },
+            ].map((step, index) => (
+              <div key={index} className="step">
+                <div className="step-number">{step.num}</div>
+                <div className="font-semibold text-lg tracking-tight mb-1.5">{step.title}</div>
+                <p className="text-sm text-[#475569] leading-snug">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-9 text-center text-sm text-[#475569]">
+            Internet-connected for remote monitoring and fast support. Monthly service keeps everything running at peak performance.
+          </div>
         </div>
       </section>
 
@@ -190,32 +194,28 @@ export default function ReconLanding() {
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
-      <section id="how" className="bg-white border-y py-12 sm:py-16 scroll-mt-24">
+      {/* SAVINGS CALCULATOR */}
+      <section id="calculator" className="bg-white border-y py-12 sm:py-16 scroll-mt-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="mb-10">
-            <div className="text-[#0f766e] text-sm font-semibold tracking-widest">SIMPLE. AUTOMATED. RELIABLE.</div>
-            <h2 className="section-title mt-1">How it works</h2>
+          <div className="mb-8 text-center">
+            <div className="inline text-[#0f766e] text-sm font-semibold tracking-widest">REAL NUMBERS FOR REAL HERDS</div>
+            <h2 className="section-title mt-2">Savings Calculator</h2>
+            <p className="mt-3 text-[#475569]">Most farms see 65–85% reduction in pre-dip chemical costs. See what it means for yours.</p>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-6">
-            {[
-              { num: '1', title: 'We install the machine', desc: 'Our technicians deliver and set up your ECALogical generator with proper water softening and electrical connections.' },
-              { num: '2', title: 'Add brine additive', desc: 'Simply load the food-grade salt-based additive into the machine. One container lasts days or weeks depending on usage.' },
-              { num: '3', title: 'Machine generates sodium hypochlorite', desc: 'Fully automated. The system produces concentrated sodium hypochlorite on a continuous schedule with zero daily intervention.' },
-              { num: '4', title: 'Blend with PH Activator & use', desc: 'Combine the sodium hypochlorite concentrate with Recon\'s PH Activator at the correct ratio to produce fresh HOCl pre-dip. Use for pre-dip, post-dip, premise wash, calf hutches, or drop hoses.' },
-            ].map((step, index) => (
-              <div key={index} className="step">
-                <div className="step-number">{step.num}</div>
-                <div className="font-semibold text-lg tracking-tight mb-1.5">{step.title}</div>
-                <p className="text-sm text-[#475569] leading-snug">{step.desc}</p>
-              </div>
-            ))}
-          </div>
+          <SavingsCalculator />
+        </div>
+      </section>
 
-          <div className="mt-9 text-center text-sm text-[#475569]">
-            Internet-connected for remote monitoring and fast support. Monthly service keeps everything running at peak performance.
-          </div>
+      {/* WHO WE ARE */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+        <div className="max-w-3xl">
+          <div className="uppercase tracking-[2px] text-xs font-semibold text-[#0f766e]">SINCE 2008 • GRAND RAPIDS, MICHIGAN</div>
+          <h2 className="section-title mt-3">We build the machines that let dairy farmers take control of their chemistry.</h2>
+          <p className="mt-4 text-[15.5px] leading-relaxed text-[#334155]">
+            Recon Technologies manufactures ECALogical on-site generators that produce sodium hypochlorite from salt, water, and electricity. Combined with Recon&apos;s PH Activator at the correct ratio, it produces fresh hypochlorous acid (HOCl) — a highly effective pre-dip and cleaning solution you make right on your farm.
+            No more waiting on trucks. No more volatile chemical prices. Just consistent, low-cost HOCl — always available, always fresh.
+          </p>
         </div>
       </section>
 
