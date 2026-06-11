@@ -1,7 +1,16 @@
 'use client';
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Calculator, TrendingUp, DollarSign } from 'lucide-react';
+
+type AppMethod = 'robot' | 'foamers' | 'spray' | 'cups';
+
+const APP_METHODS: { value: AppMethod; label: string; ml: number }[] = [
+  { value: 'robot',   label: 'Robot',        ml: 15 },
+  { value: 'foamers', label: 'Foamers',      ml: 6  },
+  { value: 'spray',   label: 'Manual Spray', ml: 17 },
+  { value: 'cups',    label: 'Dip Cups',     ml: 12 },
+];
 
 function loadSaved() {
   if (typeof window === 'undefined') return {};
@@ -13,45 +22,21 @@ function loadSaved() {
 }
 
 export default function SavingsCalculator() {
-  const [herdSize, setHerdSize] = useState<number>(() => loadSaved().herd || 620);
-  const [currentMonthly, setCurrentMonthly] = useState<number>(() => loadSaved().spend || 1850);
-  const [variablePerCow, setVariablePerCow] = useState<number>(() => loadSaved().vpc || 0.92);
-  const [serviceFee, setServiceFee] = useState<number>(() => loadSaved().fee || 189);
+  const [herdSize,  setHerdSize]  = useState<number>(() => loadSaved().herd      || 620);
+  const [method,    setMethod]    = useState<AppMethod>(() => loadSaved().method  || 'foamers');
+  const [rtuPrice,  setRtuPrice]  = useState<number>(() => loadSaved().rtuPrice  || 2.50);
+  const [milkings,  setMilkings]  = useState<2 | 3>(() => loadSaved().milkings  || 2);
 
-  // Save to localStorage when values change
   useEffect(() => {
     localStorage.setItem('reconCalculator', JSON.stringify({
-      herd: herdSize,
-      spend: currentMonthly,
-      vpc: variablePerCow,
-      fee: serviceFee,
+      herd:     herdSize,
+      method,
+      rtuPrice,
+      milkings,
     }));
-  }, [herdSize, currentMonthly, variablePerCow, serviceFee]);
+  }, [herdSize, method, rtuPrice, milkings]);
 
-  // Realistic but simplified model — assumptions are now tunable
-  const reconMonthly = useMemo(() => {
-    return Math.round(herdSize * variablePerCow + serviceFee);
-  }, [herdSize, variablePerCow, serviceFee]);
-
-  const monthlySavings = Math.max(0, currentMonthly - reconMonthly);
-  const annualSavings = monthlySavings * 12;
-  const percentSavings = currentMonthly > 0 ? Math.round((monthlySavings / currentMonthly) * 100) : 0;
-
-  // Rough recommendation
-  const recommended = herdSize > 850 || currentMonthly > 2400 ? 'Dual Cell' : 'Single Cell';
-
-  const formatCurrency = (n: number) => 
-    new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
-
-  const handleHerdChange = (value: number) => {
-    const clamped = Math.min(2800, Math.max(80, Math.round(value)));
-    setHerdSize(clamped);
-  };
-
-  const handleSpendChange = (value: number) => {
-    const clamped = Math.min(8500, Math.max(280, Math.round(value)));
-    setCurrentMonthly(clamped);
-  };
+  const methodLabel = APP_METHODS.find(m => m.value === method)?.label ?? method;
 
   return (
     <div className="card p-6 sm:p-8">
@@ -66,127 +51,118 @@ export default function SavingsCalculator() {
       </div>
 
       <div className="grid gap-8 lg:grid-cols-5">
+
         {/* Controls */}
         <div className="lg:col-span-3 space-y-7">
+
           {/* Herd Size */}
           <div>
-            <div className="flex items-baseline justify-between mb-2">
-              <label className="font-semibold text-sm tracking-wide text-[#334155]">MILKING HERD SIZE</label>
-              <div className="font-mono text-2xl font-semibold tabular-nums text-[#14532d]">{herdSize}</div>
-            </div>
-            <input
-              type="range"
-              min={80}
-              max={2800}
-              step={10}
-              value={herdSize}
-              onChange={(e) => handleHerdChange(parseInt(e.target.value))}
-              className="w-full accent-[#14532d] cursor-pointer"
-              aria-label="Milking herd size"
-            />
-            <div className="flex justify-between text-xs text-[#64748b] mt-1">
-              <div>80 cows</div>
-              <div>2,800 cows</div>
-            </div>
+            <label className="block font-semibold text-sm tracking-wide text-[#334155] mb-2">
+              MILKING HERD SIZE
+            </label>
             <input
               type="number"
               value={herdSize}
-              onChange={(e) => handleHerdChange(parseInt(e.target.value) || 80)}
-              className="input-number mt-3 max-w-[140px]"
-              min={80}
-              max={2800}
-              aria-label="Herd size exact"
+              min={50}
+              max={5000}
+              onChange={(e) => {
+                const val = parseInt(e.target.value, 10);
+                if (!isNaN(val)) setHerdSize(Math.min(5000, Math.max(50, val)));
+              }}
+              className="input-number max-w-[160px]"
+              aria-label="Milking herd size"
             />
           </div>
 
-          {/* Current Monthly Spend */}
+          {/* Application Method */}
           <div>
-            <div className="flex items-baseline justify-between mb-2">
-              <label className="font-semibold text-sm tracking-wide text-[#334155]">YOUR CURRENT MONTHLY PRE-DIP COST</label>
-              <div className="font-mono text-2xl font-semibold tabular-nums text-[#14532d]">{formatCurrency(currentMonthly)}</div>
+            <label className="block font-semibold text-sm tracking-wide text-[#334155] mb-2">
+              APPLICATION METHOD
+            </label>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {APP_METHODS.map(({ value, label, ml }) => (
+                <button
+                  key={value}
+                  type="button"
+                  onClick={() => setMethod(value)}
+                  className={`rounded-xl border px-3 py-3 text-sm text-left transition ${
+                    method === value
+                      ? 'border-[var(--color-primary)] bg-[var(--color-primary)]/5 text-[var(--color-primary)] font-semibold'
+                      : 'border-slate-200 bg-white text-[#475569] hover:border-slate-300'
+                  }`}
+                >
+                  <div className="font-semibold">{label}</div>
+                  <div className="text-xs text-[#64748b] mt-0.5">{ml} ml/teat</div>
+                </button>
+              ))}
             </div>
-            <input
-              type="range"
-              min={280}
-              max={8500}
-              step={25}
-              value={currentMonthly}
-              onChange={(e) => handleSpendChange(parseInt(e.target.value))}
-              className="w-full accent-[#14532d] cursor-pointer"
-              aria-label="Current monthly chemical spend"
-            />
-            <div className="flex justify-between text-xs text-[#64748b] mt-1">
-              <div>$280</div>
-              <div>$8,500</div>
-            </div>
-            <div className="relative mt-3 max-w-[170px]">
+          </div>
+
+          {/* Current RTU Price */}
+          <div>
+            <label className="block font-semibold text-sm tracking-wide text-[#334155] mb-2">
+              CURRENT PRE-DIP PRICE (RTU, PER GALLON)
+            </label>
+            <div className="relative max-w-[170px]">
               <div className="absolute left-3.5 top-2.5 text-[#64748b] font-medium">$</div>
               <input
                 type="number"
-                value={currentMonthly}
-                onChange={(e) => handleSpendChange(parseInt(e.target.value) || 280)}
-                className="input-number pl-7 max-w-[170px]"
-                min={280}
-                max={8500}
-                aria-label="Current spend exact"
+                value={rtuPrice}
+                step="0.01"
+                min="0.01"
+                onChange={(e) => {
+                  const val = parseFloat(e.target.value);
+                  if (!isNaN(val) && val > 0) setRtuPrice(val);
+                }}
+                className="input-number pl-7 w-full"
+                aria-label="Current pre-dip price per gallon RTU"
               />
             </div>
           </div>
 
-          <div className="pt-4 border-t text-xs">
-            <div className="font-semibold tracking-wide text-[#334155] mb-2">TUNABLE ASSUMPTIONS (adjust for your operation)</div>
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <label className="block text-[#64748b] mb-0.5">Variable $/cow/mo</label>
-                <input
-                  type="number"
-                  step="0.01"
-                  value={variablePerCow}
-                  onChange={(e) => {
-                    const val = parseFloat(e.target.value);
-                    setVariablePerCow(isNaN(val) ? 0.92 : val);
-                  }}
-                  className="input-number w-full"
-                />
-              </div>
-              <div>
-                <label className="block text-[#64748b] mb-0.5">Monthly service fee</label>
-                <input
-                  type="number"
-                  value={serviceFee}
-                  onChange={(e) => {
-                    const val = parseInt(e.target.value, 10);
-                    setServiceFee(isNaN(val) ? 189 : val);
-                  }}
-                  className="input-number w-full"
-                />
-              </div>
-            </div>
-            <div className="mt-2 text-[#64748b] leading-snug">
-              These are estimates based on real-world dairy usage patterns and on-site generation costs. Your actual numbers may vary.
+          {/* Milkings Per Day */}
+          <div>
+            <label className="block font-semibold text-sm tracking-wide text-[#334155] mb-2">
+              MILKINGS PER DAY
+            </label>
+            <div className="inline-flex rounded-xl border border-slate-200 overflow-hidden">
+              {([2, 3] as const).map((n) => (
+                <button
+                  key={n}
+                  type="button"
+                  onClick={() => setMilkings(n)}
+                  className={`px-6 py-2.5 text-sm font-semibold transition ${
+                    milkings === n
+                      ? 'bg-[var(--color-primary)] text-white'
+                      : 'bg-white text-[#475569] hover:bg-slate-50'
+                  }`}
+                >
+                  {n}×/day
+                </button>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Results */}
+        {/* Results — placeholder until calculation logic is wired */}
         <div className="lg:col-span-2 space-y-4">
           <div className="rounded-2xl bg-[#f1f5f9] p-5">
             <div className="uppercase text-[10px] tracking-[1.5px] font-semibold text-[#0f766e] mb-1">ESTIMATED MONTHLY SAVINGS</div>
-            <div className="savings-value tabular-nums">{formatCurrency(monthlySavings)}</div>
-            <div className="mt-1 text-sm text-[#15803d] font-medium flex items-center gap-1.5">
-              <TrendingUp className="w-4 h-4" /> {percentSavings}% lower than current spend
+            <div className="savings-value tabular-nums text-[#94a3b8]">—</div>
+            <div className="mt-1 text-sm text-[#94a3b8] flex items-center gap-1.5">
+              <TrendingUp className="w-4 h-4" /> Calculation coming soon
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="rounded-2xl border border-slate-200 p-4">
               <div className="text-xs uppercase tracking-widest text-[#64748b] mb-1">ANNUAL SAVINGS</div>
-              <div className="text-3xl font-semibold tabular-nums text-[#14532d]">{formatCurrency(annualSavings)}</div>
+              <div className="text-3xl font-semibold tabular-nums text-[#94a3b8]">—</div>
             </div>
             <div className="rounded-2xl border border-slate-200 p-4">
               <div className="text-xs uppercase tracking-widest text-[#64748b] mb-1">RECON MONTHLY COST</div>
-              <div className="text-3xl font-semibold tabular-nums text-[var(--color-brand-blue)]">{formatCurrency(reconMonthly)}</div>
-              <div className="text-[11px] text-[#64748b] mt-0.5">All-in (generation + support)</div>
+              <div className="text-3xl font-semibold tabular-nums text-[#94a3b8]">—</div>
+              <div className="text-[11px] text-[#64748b] mt-0.5">Estimated</div>
             </div>
           </div>
 
@@ -194,20 +170,16 @@ export default function SavingsCalculator() {
             <div className="shrink-0 p-2 bg-[var(--color-brand-blue)] rounded-xl text-white">
               <DollarSign className="w-4 h-4" />
             </div>
-            <div>
-              <span className="font-semibold">Recommended for your herd:</span>{' '}
-              <span className="font-semibold text-[var(--color-brand-blue)]">{recommended}</span> Machine
+            <div className="text-[#475569]">
+              Machine recommendation will appear once calculated.
             </div>
           </div>
 
-          <button 
-            type="button" 
+          <button
+            type="button"
             onClick={() => {
               const contact = document.getElementById('contact');
-              if (contact) {
-                contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }
-              // Use rAF to wait for scroll/layout to settle before querying DOM
+              if (contact) contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
               requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
                   const herdInput = document.querySelector('input[name="herd"]') as HTMLInputElement | null;
@@ -222,13 +194,12 @@ export default function SavingsCalculator() {
           >
             Get a Personalized Quote
           </button>
-          <p className="text-center text-[12px] text-[#64748b]">No obligation. We’ll run the exact numbers for your parlor.</p>
+          <p className="text-center text-[12px] text-[#64748b]">No obligation. We&apos;ll run the exact numbers for your parlor.</p>
 
-          {/* Share / Email results */}
           <div className="pt-3 border-t flex gap-2">
             <button
               onClick={() => {
-                const text = `Recon Savings Estimate\nHerd: ${herdSize} cows\nCurrent: ${formatCurrency(currentMonthly)}/mo\nRecon est: ${formatCurrency(reconMonthly)}/mo\nMonthly savings: ${formatCurrency(monthlySavings)} (${percentSavings}%)\nAnnual savings: ${formatCurrency(annualSavings)}\nRecommended: ${recommended} Cell`;
+                const text = `Recon Savings Estimate\nHerd: ${herdSize} cows\nMethod: ${methodLabel}\nCurrent RTU price: $${rtuPrice.toFixed(2)}/gal\nMilkings/day: ${milkings}x\nMonthly savings: —\nAnnual savings: —`;
                 navigator.clipboard?.writeText(text);
                 alert('Results copied to clipboard!');
               }}
@@ -237,13 +208,19 @@ export default function SavingsCalculator() {
               Copy results
             </button>
             <a
-              href={`mailto:?subject=Recon%20Savings%20Estimate&body=${encodeURIComponent(`Herd: ${herdSize} cows\nCurrent monthly cost: ${formatCurrency(currentMonthly)}\nEstimated Recon cost: ${formatCurrency(reconMonthly)}\nMonthly savings: ${formatCurrency(monthlySavings)} (${percentSavings}%)\nAnnual savings: ${formatCurrency(annualSavings)}\nRecommended machine: ${recommended} Cell\n\n(Estimates only — contact Recon for exact quote.)`)}`}
+              href={`mailto:?subject=Recon%20Savings%20Estimate&body=${encodeURIComponent(
+                `Herd: ${herdSize} cows\nApplication method: ${methodLabel}\nCurrent RTU price: $${rtuPrice.toFixed(2)}/gal\nMilkings/day: ${milkings}x\n\n(Visit recon.loewfizzle.com to see full savings estimate.)`
+              )}`}
               className="btn-secondary text-sm flex-1 justify-center"
             >
               Email results
             </a>
           </div>
         </div>
+      </div>
+
+      <div className="mt-6 pt-4 border-t text-[11px] text-[#94a3b8] leading-snug">
+        Application volume assumptions: Robot 15 ml · Foamers 6 ml · Manual Spray 17 ml · Dip Cups 12 ml per teat per milking. RTU = ready-to-use dilution.
       </div>
     </div>
   );
