@@ -202,8 +202,9 @@ export default function SavingsCalculator() {
               <div className="text-2xl font-semibold tabular-nums text-[#14532d]">{fmt(annualSavings)}</div>
             </div>
             <div className="rounded-2xl border border-slate-200 p-4">
-              <div className="text-xs uppercase tracking-widest text-[#64748b] mb-1">RECON MONTHLY</div>
+              <div className="text-xs uppercase tracking-widest text-[#64748b] mb-1">RECON / MONTH</div>
               <div className="text-2xl font-semibold tabular-nums text-[var(--color-brand-blue)]">{fmt(reconMonthly)}</div>
+              <div className="text-xs text-[#64748b] mt-1">${selectedMethod.reconCostPerGal.toFixed(2)}/gal</div>
             </div>
           </div>
 
@@ -215,7 +216,7 @@ export default function SavingsCalculator() {
             <div>
               <span className="text-[#64748b]">Your current monthly cost: </span>
               <span className="font-semibold text-[#334155]">{fmt(currentMonthly)}</span>
-              <span className="text-[#64748b] text-xs ml-1">({Math.round(gallonsPerMonth)} gal/mo)</span>
+              <div className="text-xs text-[#94a3b8] mt-0.5">${rtuPrice.toFixed(2)}/gal · {Math.round(gallonsPerMonth)} gal/mo</div>
             </div>
           </div>
 
@@ -268,7 +269,7 @@ export default function SavingsCalculator() {
       </div>
 
       <div className="mt-6 pt-4 border-t text-[11px] text-[#94a3b8] leading-snug">
-        Application volume assumptions: Robot 15 ml · Foamers 6 ml · Manual Spray 17 ml · Dip Cups 12 ml per teat per milking. Recon cost includes PH activator, sodium hypochlorite, and surfactant. RTU = ready-to-use.
+        Application volume assumptions: Robot 15 ml · Foamers 6 ml · Manual Spray 17 ml · Dip Cups 12 ml per cow per milking. Recon cost includes PH activator, sodium hypochlorite, and surfactant. RTU = ready-to-use.
       </div>
     </div>
   );
