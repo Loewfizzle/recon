@@ -243,9 +243,13 @@ export default function DualCellCard() {
           >
             Learn More
           </button>
-          <a href="#calculator" className="btn-secondary flex-1 sm:flex-none justify-center">
+          <button
+            type="button"
+            onClick={() => document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+            className="btn-secondary flex-1 sm:flex-none justify-center"
+          >
             See Savings
-          </a>
+          </button>
         </div>
         </div>
       </div>

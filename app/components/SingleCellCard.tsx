@@ -132,9 +132,13 @@ export default function SingleCellCard() {
             >
               Learn More
             </button>
-            <a href="#calculator" className="btn-primary flex-1 sm:flex-none justify-center">
+            <button
+              type="button"
+              onClick={() => document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+              className="btn-primary flex-1 sm:flex-none justify-center"
+            >
               See Savings
-            </a>
+            </button>
           </div>
         </div>
       </div>

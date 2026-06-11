@@ -1,6 +1,6 @@
 ﻿'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SavingsCalculator from './components/SavingsCalculator';
@@ -9,7 +9,13 @@ import DualCellCard from './components/DualCellCard';
 import SingleCellCard from './components/SingleCellCard';
 import HOClModal from './components/HOClModal';
 
+const scrollTo = (id: string) =>
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
 export default function ReconLanding() {
+  useEffect(() => {
+    history.scrollRestoration = 'manual';
+  }, []);
 
   return (
     <div id="top" className="min-h-screen flex flex-col bg-[#f8fafc] text-[#0f172a]">
@@ -31,12 +37,12 @@ export default function ReconLanding() {
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-            <a href="#calculator" className="btn-primary px-8 py-3.5 text-base">
+            <button type="button" onClick={() => scrollTo('calculator')} className="btn-primary px-8 py-3.5 text-base">
               Calculate My Savings <ArrowRight className="w-4 h-4" />
-            </a>
-            <a href="#machines" className="btn-secondary px-8 py-3.5 text-base">
+            </button>
+            <button type="button" onClick={() => scrollTo('machines')} className="btn-secondary px-8 py-3.5 text-base">
               See the Machines
-            </a>
+            </button>
           </div>
 
           <div className="mt-6 flex items-center justify-center gap-x-6 text-sm text-[#64748b]">

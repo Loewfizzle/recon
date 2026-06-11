@@ -28,7 +28,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-24 flex items-center justify-between">
         {/* Logo - full lockup */}
-        <a href="#top" className="flex items-center group" aria-label="Recon Technologies home">
+        <a href="#top" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="flex items-center group" aria-label="Recon Technologies home">
           <Image 
             src="/logo.png" 
             alt="Recon Technologies" 

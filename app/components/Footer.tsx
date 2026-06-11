@@ -1,5 +1,10 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
+
+const scrollTo = (id: string) =>
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
 export default function Footer() {
   return (
@@ -8,16 +13,16 @@ export default function Footer() {
         <div>
           <div className="flex items-center gap-2 mb-3">
             {/* American flag icon (replaces logo in footer) - larger on mobile */}
-            <div 
-              className="w-16 h-8 flex-shrink-0 overflow-hidden" 
+            <div
+              className="w-16 h-8 flex-shrink-0 overflow-hidden"
               aria-hidden="true"
             >
-              <Image 
-                src="/usa-flag.png" 
-                alt="" 
-                width={64} 
-                height={32} 
-                className="w-full h-full object-contain" 
+              <Image
+                src="/usa-flag.png"
+                alt=""
+                width={64}
+                height={32}
+                className="w-full h-full object-contain"
               />
             </div>
           </div>
@@ -29,18 +34,18 @@ export default function Footer() {
         <div>
           <div className="uppercase tracking-[1px] text-xs font-semibold text-slate-400 mb-3">Products</div>
           <ul className="space-y-[9px] text-sm">
-            <li><a href="#machines" className="hover:text-white transition">Single Cell Machine</a></li>
-            <li><a href="#machines" className="hover:text-white transition">Dual Cell Machine</a></li>
-            <li><a href="#comparison" className="hover:text-white transition">HOCl Pre-Dip</a></li>
+            <li><button onClick={() => scrollTo('machines')} className="hover:text-white transition">Single Cell Machine</button></li>
+            <li><button onClick={() => scrollTo('machines')} className="hover:text-white transition">Dual Cell Machine</button></li>
+            <li><button onClick={() => scrollTo('comparison')} className="hover:text-white transition">HOCl Pre-Dip</button></li>
           </ul>
         </div>
 
         <div>
           <div className="uppercase tracking-[1px] text-xs font-semibold text-slate-400 mb-3">Company</div>
           <ul className="space-y-[9px] text-sm">
-            <li><a href="#why" className="hover:text-white transition">Why Farmers Choose Us</a></li>
-            <li><a href="#how" className="hover:text-white transition">How It Works</a></li>
-            <li><a href="#calculator" className="hover:text-white transition">Savings Calculator</a></li>
+            <li><button onClick={() => scrollTo('why')} className="hover:text-white transition">Why Farmers Choose Us</button></li>
+            <li><button onClick={() => scrollTo('how')} className="hover:text-white transition">How It Works</button></li>
+            <li><button onClick={() => scrollTo('calculator')} className="hover:text-white transition">Savings Calculator</button></li>
           </ul>
         </div>
 
