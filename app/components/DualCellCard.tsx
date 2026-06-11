@@ -206,7 +206,7 @@ export default function DualCellCard() {
             alt="C-200 Dual Cell ECALogical machine"
             width={800}
             height={500}
-            className="w-full h-44 sm:h-52 object-cover"
+            className="w-full h-72 sm:h-80 object-cover"
           />
         </div>
 

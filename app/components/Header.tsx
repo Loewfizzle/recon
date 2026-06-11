@@ -64,13 +64,13 @@ export default function Header() {
             <Phone className="w-4 h-4" />
             800-338-4950
           </a>
-          <a
-            href="#calculator"
-            onClick={(e) => handleNavClick(e, '#calculator')}
+          <button
+            type="button"
+            onClick={() => document.querySelector('#calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
             className="btn-primary text-sm px-5 py-2 h-10"
           >
             Calculate Savings
-          </a>
+          </button>
         </div>
 
         {/* Mobile: Phone + Hamburger */}
@@ -123,13 +123,13 @@ export default function Header() {
             >
               <Phone className="w-4 h-4" /> Call 800-338-4950
             </a>
-            <a
-              href="#calculator"
-              onClick={(e) => handleNavClick(e, '#calculator')}
+            <button
+              type="button"
+              onClick={() => { closeMenu(); setTimeout(() => document.querySelector('#calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50); }}
               className="btn-primary mt-2 justify-center"
             >
               Calculate Your Savings
-            </a>
+            </button>
           </nav>
         </div>
       )}
