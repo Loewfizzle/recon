@@ -37,7 +37,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: 'history.scrollRestoration = "manual"' }} />
+        <script dangerouslySetInnerHTML={{ __html: 'history.scrollRestoration="manual";window.addEventListener("load",function(){window.scrollTo(0,0)});window.addEventListener("pageshow",function(){window.scrollTo(0,0)})' }} />
       </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
