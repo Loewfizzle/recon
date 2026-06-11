@@ -109,7 +109,7 @@ export default function ReconLanding() {
           <div className="hidden sm:grid gap-3 bg-slate-50 px-4 py-3.5 text-sm font-semibold text-[#334155] border-b" style={{ gridTemplateColumns: '1.1fr 1fr 1fr' }}>
             <div>Factor</div>
             <div>Traditional Iodine</div>
-            <div className="text-[var(--color-brand-blue)]">Recon HOCl (ECActiv)</div>
+            <div className="text-[var(--color-brand-blue)]">Recon HOCl</div>
           </div>
 
           {/* Rows */}
@@ -231,18 +231,20 @@ export default function ReconLanding() {
             onSubmit={(e) => {
               e.preventDefault();
               const form = e.currentTarget as HTMLFormElement;
+              const name = (form.elements.namedItem('name') as HTMLInputElement)?.value || '';
               const phone = (form.elements.namedItem('phone') as HTMLInputElement)?.value || '';
               const herd = (form.elements.namedItem('herd') as HTMLInputElement)?.value || '';
               const notes = (form.elements.namedItem('notes') as HTMLTextAreaElement)?.value || '';
-              const body = `Phone: ${phone}\nHerd size: ${herd}\nNotes: ${notes}\n\n(From website landing page)`;
+              const body = `Name: ${name}\nPhone: ${phone}\nHerd size: ${herd}\nNotes: ${notes}\n\n(From website landing page)`;
               window.open(`mailto:recon@recontechusa.com?subject=Free%20on-farm%20analysis%20request&body=${encodeURIComponent(body)}`);
             }}
           >
             <div className="text-white/90 text-sm font-semibold mb-3">Request free on-farm analysis</div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <input name="name" type="text" required placeholder="Your name" className="bg-white text-[#0f172a] rounded-lg px-3 py-2 text-sm" />
               <input name="phone" type="tel" required placeholder="Phone number" className="bg-white text-[#0f172a] rounded-lg px-3 py-2 text-sm" />
-              <input name="herd" type="number" placeholder="Herd size (optional)" className="bg-white text-[#0f172a] rounded-lg px-3 py-2 text-sm" />
             </div>
+            <input name="herd" type="number" placeholder="Herd size (optional)" className="mt-3 w-full bg-white text-[#0f172a] rounded-lg px-3 py-2 text-sm" />
             <textarea name="notes" placeholder="Notes (e.g. current pre-dip cost, questions)" className="mt-3 w-full bg-white text-[#0f172a] rounded-lg px-3 py-2 text-sm h-16 resize-y" />
             <button type="submit" className="mt-3 w-full btn-primary text-base py-2.5">Send request</button>
             <div className="mt-2 text-[11px] text-white/60 text-center">Fast follow up. No obligation.</div>

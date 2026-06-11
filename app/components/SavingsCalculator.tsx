@@ -173,7 +173,7 @@ export default function SavingsCalculator() {
                   const val = parseFloat(rtuRaw);
                   const clean = isNaN(val) || val <= 0 ? rtuPrice : val;
                   setRtuPrice(clean);
-                  setRtuRaw(String(clean));
+                  setRtuRaw(clean.toFixed(2));
                 }}
                 className="input-number input-currency w-full"
                 aria-label="Current pre-dip price per gallon RTU"
@@ -270,7 +270,7 @@ export default function SavingsCalculator() {
       </div>
 
       <div className="mt-6 pt-4 border-t text-[11px] text-[#94a3b8] leading-snug">
-        Application volume assumptions: Robot 15 ml · Foamers 6 ml · Manual Spray 17 ml · Dip Cups 12 ml per cow per milking. Recon cost includes PH activator, sodium hypochlorite, and surfactant. RTU = ready-to-use.
+        Application volume assumptions: Robot 15 ml · Foamers 6 ml · Manual Spray 17 ml · Dip Cups 12 ml per cow per milking. Recon cost includes PH activator, sodium hypochlorite, and surfactant. Foamers cost is higher due to increased surfactant concentration required. RTU = ready-to-use.
       </div>
     </div>
   );
