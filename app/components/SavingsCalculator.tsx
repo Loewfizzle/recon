@@ -150,7 +150,7 @@ export default function SavingsCalculator() {
                   }`}
                 >
                   <div className="font-semibold">{label}</div>
-                  <div className="text-xs text-[#64748b] mt-0.5">{ml} ml/teat</div>
+                  <div className="text-xs text-[#64748b] mt-0.5">{ml} ml/cow</div>
                 </button>
               ))}
             </div>
