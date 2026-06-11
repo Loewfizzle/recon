@@ -8,9 +8,9 @@ const navLinks = [
   { href: '#machines', label: 'Machines' },
   { href: '#hocl', label: 'HOCl Science' },
   { href: '#comparison', label: 'HOCl vs Iodine' },
-  { href: '#calculator', label: 'Savings Calculator' },
-  { href: '#why', label: 'Why Recon' },
   { href: '#how', label: 'How It Works' },
+  { href: '#why', label: 'Why Recon' },
+  { href: '#calculator', label: 'Savings Calculator' },
 ];
 
 export default function Header() {
