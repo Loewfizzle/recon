@@ -199,11 +199,11 @@ export default function SavingsCalculator() {
           <div className="grid grid-cols-2 gap-4">
             <div className="rounded-2xl border border-slate-200 p-4">
               <div className="text-xs uppercase tracking-widest text-[#64748b] mb-1">ANNUAL SAVINGS</div>
-              <div className="text-3xl font-semibold tabular-nums text-[#14532d]">{fmt(annualSavings)}</div>
+              <div className="text-2xl font-semibold tabular-nums text-[#14532d]">{fmt(annualSavings)}</div>
             </div>
             <div className="rounded-2xl border border-slate-200 p-4">
               <div className="text-xs uppercase tracking-widest text-[#64748b] mb-1">RECON MONTHLY</div>
-              <div className="text-3xl font-semibold tabular-nums text-[var(--color-brand-blue)]">{fmt(reconMonthly)}</div>
+              <div className="text-2xl font-semibold tabular-nums text-[var(--color-brand-blue)]">{fmt(reconMonthly)}</div>
             </div>
           </div>
 
