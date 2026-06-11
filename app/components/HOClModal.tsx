@@ -11,7 +11,7 @@ function ModalContent({ onTalkToSpecialist }: { onTalkToSpecialist: () => void }
         <h4 className="font-semibold text-base tracking-tight mb-3 text-[var(--color-primary)]">What is HOCl?</h4>
         <p className="text-[#334155] leading-relaxed">
           Hypochlorous acid (HOCl) is a weak acid and powerful oxidizing agent that occurs naturally — it is the
-          same molecule your own white blood cells produce to fight infection. At the correct pH (between 3.5 and 5.5),
+          same molecule your own white blood cells produce to fight infection. At the correct pH (between 5 and 7),
           sodium hypochlorite converts to HOCl, which is 80–120x more effective as a biocide than sodium hypochlorite
           alone at the same concentration.
         </p>
