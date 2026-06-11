@@ -240,22 +240,28 @@ export default function SavingsCalculator() {
           </button>
           <p className="text-center text-[12px] text-[#64748b]">No obligation. We&apos;ll run the exact numbers for your parlor.</p>
 
-          <div className="pt-3 border-t flex gap-2">
+          <div className="pt-3 border-t">
             <button
-              onClick={() => {
-                navigator.clipboard?.writeText(copyText);
-                alert('Results copied to clipboard!');
+              onClick={async () => {
+                const shareData = {
+                  title: 'Recon Savings Estimate',
+                  text: copyText + '\n\n(Visit recon.loewfizzle.com to calculate your own estimate.)',
+                };
+                if (navigator.share) {
+                  try {
+                    await navigator.share(shareData);
+                  } catch {
+                    // user cancelled — do nothing
+                  }
+                } else {
+                  navigator.clipboard?.writeText(shareData.text);
+                  alert('Results copied to clipboard!');
+                }
               }}
-              className="btn-secondary text-sm flex-1 justify-center"
+              className="btn-secondary text-sm w-full justify-center"
             >
-              Copy results
+              Share Results
             </button>
-            <a
-              href={`mailto:?subject=Recon%20Savings%20Estimate&body=${encodeURIComponent(copyText + '\n\n(Visit recon.loewfizzle.com to calculate your own estimate.)')}`}
-              className="btn-secondary text-sm flex-1 justify-center"
-            >
-              Email results
-            </a>
           </div>
 
         </div>
