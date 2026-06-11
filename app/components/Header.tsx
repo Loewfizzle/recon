@@ -21,7 +21,9 @@ export default function Header() {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     closeMenu();
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(() => {
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
   };
 
   return (
