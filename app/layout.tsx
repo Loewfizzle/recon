@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Recon Technologies | On-Site HOCl Generation for Dairy Farms",
   description: "Generate fresh sodium hypochlorite (HOCl) on your dairy farm for pre-dip and parlor cleaning. Cut chemical costs dramatically with Recon ECALogical machines. Serving dairy producers since 2008.",
-  metadataBase: new URL("https://recon.loewfizzle.com"),
+  metadataBase: new URL("https://recontechusa.com"),
   icons: {
     icon: "/favicon.ico",
   },
