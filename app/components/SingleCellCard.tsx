@@ -121,13 +121,16 @@ export default function SingleCellCard() {
             Reliable output for most dairies. Ideal for herds focused primarily on pre-dip, up to ~900 cows.
           </p>
 
-          <div className="mt-4 flex items-baseline gap-2">
-            <span className="text-4xl font-semibold tabular-nums text-[var(--color-primary)]">~100</span>
-            <span className="text-[#475569] text-[15px]">hours to fill a 275-gallon tote</span>
+          {/* Number group pinned to the bottom so the figure aligns across cards */}
+          <div className="mt-auto">
+            <div className="mt-4 flex items-baseline gap-2">
+              <span className="text-4xl font-semibold tabular-nums text-[var(--color-primary)]">~100</span>
+              <span className="text-[#475569] text-[15px]">hours to fill a 275-gallon tote</span>
+            </div>
+            <div className="text-xs text-[#64748b] mt-1">Concentrate — yields ~1,925 gal RTU per tote</div>
           </div>
-          <div className="text-xs text-[#64748b] mt-1">Concentrate — yields ~1,925 gal RTU per tote</div>
 
-          <div className="mt-auto pt-6 flex flex-wrap gap-3">
+          <div className="pt-6 flex flex-wrap gap-3">
             <button
               type="button"
               onClick={() => setOpen(true)}
